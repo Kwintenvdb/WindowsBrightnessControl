@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace TestSetBrightness
+namespace WindowsBrightnessControl
 {
     public partial class App : Application
     {

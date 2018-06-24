@@ -11,7 +11,6 @@
 				Minimum="0"
 				Maximum="100"
 				Delay="0"
-				Value="{Binding Brightness, Mode=OneWay}"/>
-		<Calendar HorizontalAlignment="Left" Margin="152,140,0,0" VerticalAlignment="Top"/>
+				Value="{Binding Brightness, Mode=TwoWay}"/>
 	</Grid>
 </Window>
