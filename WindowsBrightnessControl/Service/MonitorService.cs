@@ -25,7 +25,11 @@ namespace WindowsBrightnessControl.Service
 				Dvxa2.GetPhysicalMonitorsFromHMONITOR(displayMonitorPtr, nrPhysicalMonitors, physMonitors);
 
 				// Need to decide if this conversion is really necessary...
-				physicalMonitors.AddRange(physMonitors.Select(x => new PhysicalMonitor()));
+				physicalMonitors.AddRange(physMonitors.Select(x => new PhysicalMonitor()
+				{
+					hPhysicalMonitor = x.hPhysicalMonitor,
+					szPhysicalMonitorDescription = x.szPhysicalMonitorDescription
+				}));
 			}
 			return physicalMonitors;
 		}
