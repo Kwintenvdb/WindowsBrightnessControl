@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsBrightnessControl", "WindowsBrightnessControl\WindowsBrightnessControl.csproj", "{BBD81C1C-53DA-4A2B-955C-19DC90C7CE42}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBD81C1C-53DA-4A2B-955C-19DC90C7CE42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBD81C1C-53DA-4A2B-955C-19DC90C7CE42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBD81C1C-53DA-4A2B-955C-19DC90C7CE42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBD81C1C-53DA-4A2B-955C-19DC90C7CE42}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4993BCCB-C328-474D-9221-F169296A0DD6}
+	EndGlobalSection
+EndGlobal
