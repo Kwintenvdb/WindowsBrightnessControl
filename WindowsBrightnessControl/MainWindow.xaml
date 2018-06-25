@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow"
+		Width="300" Height="Auto"
+		WindowStyle="None"
+		SizeToContent="Height"
+		ResizeMode="NoResize">
+    <Grid Background="Black">
 		<!--Testing taskbar icon...-->
 		<tb:TaskbarIcon x:Name="myNotifyIcon"
                     Visibility="Visible"
@@ -14,12 +18,12 @@
                     MenuActivation="LeftOrRightClick"
                     PopupActivation="DoubleClick"/>
 
-		<Slider HorizontalAlignment="Left" Margin="85,74,0,0" VerticalAlignment="Top" Width="200"
+		<Slider VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				Minimum="0"
 				Maximum="100"
 				Delay="0"
 				TickFrequency="10"
 				IsSnapToTickEnabled="True"
-				Value="{Binding Brightness, Mode=TwoWay}"/>
+				Value="{Binding Brightness, Mode=TwoWay}" Margin="10"/>
 	</Grid>
 </Window>
