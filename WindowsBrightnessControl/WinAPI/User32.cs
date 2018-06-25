@@ -14,5 +14,8 @@ namespace WindowsBrightnessControl.WinAPI
 
 		[DllImport(ASSEMBLY_NAME, SetLastError = true)]
 		public static extern bool RegisterHotKey(IntPtr hWnd, Int32 id, UInt32 fsModifiers, UInt32 vk);
+
+		[DllImport(ASSEMBLY_NAME, SetLastError = true)]
+		public static extern bool UnregisterHotKey(IntPtr hWnd, Int32 id);
 	}
 }
