@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using WindowsBrightnessControl.Model;
 using WindowsBrightnessControl.Service;
 
@@ -33,7 +34,11 @@ namespace WindowsBrightnessControl.ViewModel
 			}
 			set
 			{
-				_monitorService.SetMonitorBrightness(MonitorPtr, value);
+				// Run on a different thread because this is very slow.
+				Task.Run(() =>
+				{
+					_monitorService.SetMonitorBrightness(MonitorPtr, value);
+				});
 				_cachedBrightness = value;
 				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Brightness)));
 			}

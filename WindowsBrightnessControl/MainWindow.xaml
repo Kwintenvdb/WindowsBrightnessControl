@@ -3,14 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TestSetBrightness"
+		xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-		<Slider HorizontalAlignment="Left" Margin="85,74,0,0" VerticalAlignment="Top" Width="100"
+		<!--Testing taskbar icon...-->
+		<tb:TaskbarIcon x:Name="myNotifyIcon"
+                    Visibility="Visible"
+                    ToolTipText="Fallback ToolTip for Windows xp"
+                    MenuActivation="LeftOrRightClick"
+                    PopupActivation="DoubleClick"/>
+
+		<Slider HorizontalAlignment="Left" Margin="85,74,0,0" VerticalAlignment="Top" Width="200"
 				Minimum="0"
 				Maximum="100"
 				Delay="0"
+				TickFrequency="10"
+				IsSnapToTickEnabled="True"
 				Value="{Binding Brightness, Mode=TwoWay}"/>
 	</Grid>
 </Window>

@@ -57,10 +57,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Settings.cs" />
     <Compile Include="Service\IMonitorService.cs" />
+    <Compile Include="Service\ISettingsProvider.cs" />
     <Compile Include="Service\MonitorService.cs" />
+    <Compile Include="Service\SettingsProvider.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MonitorViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="WinAPI\Dvxa2.cs" />
     <Compile Include="WinAPI\PhysicalMonitor.cs" />
     <Compile Include="WinAPI\Rect.cs" />
