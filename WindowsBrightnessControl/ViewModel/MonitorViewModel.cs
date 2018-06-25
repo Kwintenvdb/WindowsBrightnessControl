@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using WindowsBrightnessControl.Model;
 using WindowsBrightnessControl.Service;
 
@@ -9,8 +8,7 @@ namespace WindowsBrightnessControl.ViewModel
 	{
 		private PhysicalMonitor _monitor;
 		private IMonitorService _monitorService;
-
-		private uint _cachedBrightness;
+		private int _cachedBrightness;
 
 		private IntPtr MonitorPtr => _monitor.hPhysicalMonitor;
 
@@ -18,11 +16,10 @@ namespace WindowsBrightnessControl.ViewModel
 		{
 			_monitor = monitor;
 			_monitorService = monitorService;
-
-			_cachedBrightness = _monitorService.GetMonitorBrightness(MonitorPtr);
+			_cachedBrightness = (int)_monitorService.GetMonitorBrightness(MonitorPtr);
 		}
 
-		public uint Brightness
+		public int Brightness
 		{
 			get
 			{
@@ -31,13 +28,15 @@ namespace WindowsBrightnessControl.ViewModel
 			}
 			set
 			{
-				// Run on a different thread because this is very slow.
-				Task.Run(() =>
+				// Clamp the brightness between 0 and 100.
+				// Could replace with WinApi delivered min and max later.
+				int newBrightness = Math.Min(100, Math.Max(0, value));
+				if (_cachedBrightness != newBrightness)
 				{
-					_monitorService.SetMonitorBrightness(MonitorPtr, value);
-				});
-				_cachedBrightness = value;
-				RaisePropertyChanged(nameof(Brightness));
+					_cachedBrightness = newBrightness;
+					RaisePropertyChanged(nameof(Brightness));
+					_monitorService.SetMonitorBrightness(MonitorPtr, (uint)newBrightness);
+				}
 			}
 		}
 	}

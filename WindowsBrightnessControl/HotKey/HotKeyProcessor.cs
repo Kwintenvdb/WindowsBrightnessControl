@@ -29,12 +29,10 @@ namespace WindowsBrightnessControl.HotKey
 			_windowHandleSource.AddHook(HwndHook);
 		}
 
-		// Pass in some params...
 		public void AddHotKey(ModifierKeys modifiers, Key keys, Action action)
 		{
-			// get an id for each hotkey.
-			int id = 0x9000;
-			uint virtualKeys = (uint)KeyInterop.VirtualKeyFromKey(Key.F10);
+			int id = _hotKeys.Count;
+			uint virtualKeys = (uint)KeyInterop.VirtualKeyFromKey(keys);
 			var hotKey = new HotKey(id, action);
 			_hotKeys.Add(id, hotKey);
 			User32.RegisterHotKey(_windowHandleSource.Handle, id, (uint)modifiers, virtualKeys);

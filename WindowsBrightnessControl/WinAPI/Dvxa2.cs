@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace WindowsBrightnessControl.WinAPI
 {
@@ -7,9 +8,11 @@ namespace WindowsBrightnessControl.WinAPI
 	{
 		public const string ASSEMBLY_NAME = "Dxva2.dll";
 
+		[SuppressUnmanagedCodeSecurity]
 		[DllImport(ASSEMBLY_NAME, ExactSpelling = true, SetLastError = true, PreserveSig = false)]
 		public static extern void GetMonitorBrightness(IntPtr hMonitor, [Out] out UInt32 pdwMinimumBrightness, [Out] out UInt32 pdwCurrentBrightness, [Out] out UInt32 pdwMaximumBrightness);
 
+		[SuppressUnmanagedCodeSecurity]
 		[DllImport(ASSEMBLY_NAME, ExactSpelling = true, SetLastError = true, PreserveSig = false)]
 		public static extern void SetMonitorBrightness(IntPtr hMonitor, UInt32 dwNewBrightness);
 
