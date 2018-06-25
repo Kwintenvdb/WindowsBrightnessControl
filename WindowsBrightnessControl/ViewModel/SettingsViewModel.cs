@@ -2,7 +2,7 @@
 
 namespace WindowsBrightnessControl.ViewModel
 {
-	public class SettingsViewModel
+	public class SettingsViewModel : ObservableObject
 	{
 		private Settings _settings;
 

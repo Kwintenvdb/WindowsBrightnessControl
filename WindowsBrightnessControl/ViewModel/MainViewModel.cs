@@ -1,6 +1,6 @@
 ﻿namespace WindowsBrightnessControl.ViewModel
 {
-	public class MainViewModel
+	public class MainViewModel : ObservableObject
 	{
 	}
 }

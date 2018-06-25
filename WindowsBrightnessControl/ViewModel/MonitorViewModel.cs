@@ -1,19 +1,16 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using WindowsBrightnessControl.Model;
 using WindowsBrightnessControl.Service;
 
 namespace WindowsBrightnessControl.ViewModel
 {
-	public class MonitorViewModel : INotifyPropertyChanged
+	public class MonitorViewModel : ObservableObject
 	{
 		private PhysicalMonitor _monitor;
 		private IMonitorService _monitorService;
 
 		private uint _cachedBrightness;
-
-		public event PropertyChangedEventHandler PropertyChanged;
 
 		private IntPtr MonitorPtr => _monitor.hPhysicalMonitor;
 
@@ -40,7 +37,7 @@ namespace WindowsBrightnessControl.ViewModel
 					_monitorService.SetMonitorBrightness(MonitorPtr, value);
 				});
 				_cachedBrightness = value;
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Brightness)));
+				RaisePropertyChanged(nameof(Brightness));
 			}
 		}
 	}
