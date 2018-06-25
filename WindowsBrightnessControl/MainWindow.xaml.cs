@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Interop;
+using WindowsBrightnessControl.HotKey;
 using WindowsBrightnessControl.Service;
 using WindowsBrightnessControl.ViewModel;
 using WindowsBrightnessControl.WinAPI;
@@ -22,15 +24,18 @@ namespace TestSetBrightness
 
 		private const int HOTKEY_ID = 9000;
 
+		private IMonitorService _monitorService;
+		private MonitorViewModel _monitorVm;
+
 		public MainWindow()
         {
             InitializeComponent();
 
 			// Monitor interface...
-			var monitorService = new MonitorService();
-			var monitors = monitorService.GetPhysicalMonitors();
-			var vm = new MonitorViewModel(monitors.First(), monitorService);
-			DataContext = vm;
+			_monitorService = new MonitorService();
+			var monitors = _monitorService.GetPhysicalMonitors();
+			_monitorVm = new MonitorViewModel(monitors.First(), _monitorService);
+			DataContext = _monitorVm;
 
 			// Settings interface...
 			var settingsProvider = new SettingsProvider();
@@ -42,28 +47,16 @@ namespace TestSetBrightness
 		{
 			base.OnSourceInitialized(e);
 			var handle = new WindowInteropHelper(this).Handle;
-			var source = HwndSource.FromHwnd(handle);
-			source.AddHook(HwndHook);
 
-			bool registered = User32.RegisterHotKey(handle, HOTKEY_ID, MOD_CONTROL, VK_CAPITAL);
-		}
+			// Use interface...
+			var hotKeyProcessor = new HotKeyProcessor();
+			hotKeyProcessor.StartHotKeyProcessor(handle);
 
-		private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-		{
-			const int WM_HOTKEY = 0x0312;
-			switch (msg)
+			// Setup hotkeys...
+			hotKeyProcessor.AddHotKey(ModifierKeys.Alt, Key.F10, () =>
 			{
-				case WM_HOTKEY:
-					switch (wParam.ToInt32())
-					{
-						case HOTKEY_ID:
-							Console.WriteLine("Hotkey pressed...");
-							handled = true;
-							break;
-					}
-					break;
-			}
-			return IntPtr.Zero;
+				_monitorVm.Brightness -= 5;
+			});
 		}
 	}
 }

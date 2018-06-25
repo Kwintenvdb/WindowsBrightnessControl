@@ -57,6 +57,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HotKey\HotKeyProcessor.cs" />
+    <Compile Include="HotKey\IHotKeyProcessor.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Service\IMonitorService.cs" />
     <Compile Include="Service\ISettingsProvider.cs" />
