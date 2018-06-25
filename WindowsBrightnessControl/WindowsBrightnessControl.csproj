@@ -64,6 +64,7 @@
     <Compile Include="Service\SettingsProvider.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MonitorViewModel.cs" />
+    <Compile Include="ViewModel\ObservableObject.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="WinAPI\Dvxa2.cs" />
     <Compile Include="WinAPI\PhysicalMonitor.cs" />

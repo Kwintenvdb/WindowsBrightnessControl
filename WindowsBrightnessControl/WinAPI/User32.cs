@@ -7,7 +7,12 @@ namespace WindowsBrightnessControl.WinAPI
 
 	public class User32
 	{
-		[DllImport("user32.dll", SetLastError = true)]
+		public const string ASSEMBLY_NAME = "user32.dll";
+
+		[DllImport(ASSEMBLY_NAME, SetLastError = true)]
 		public static extern bool EnumDisplayMonitors(IntPtr hdc, IntPtr lprcClip, MonitorEnumDelegate lpfnEnum, IntPtr dwData);
+
+		[DllImport(ASSEMBLY_NAME, SetLastError = true)]
+		public static extern bool RegisterHotKey(IntPtr hWnd, Int32 id, UInt32 fsModifiers, UInt32 vk);
 	}
 }
