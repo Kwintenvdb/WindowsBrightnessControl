@@ -4,28 +4,52 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Windows Brightness Control Settings" Height="300" Width="300"
+        Title="Windows Brightness Control Settings" Height="300" Width="350"
+		WindowStartupLocation="CenterScreen"
 		ResizeMode="NoResize">
 	<Grid>
 		<TabControl TabStripPlacement="Top">
-			<TabItem Header="General">
+			<TabItem Header="Application">
 				<StackPanel Margin="10" Orientation="Vertical">
-					<StackPanel.Resources>
-						<Style TargetType="{x:Type CheckBox}">
-							<Setter Property="Margin" Value="0,0,0,5"/>
-						</Style>
-					</StackPanel.Resources>
-					
-					<CheckBox Content="Run app on startup" IsChecked="{Binding Settings.RunOnStartUp}"/>
-					<CheckBox Content="Use hotkeys" IsChecked="{Binding Settings.UseHotKeys}"/>
+					<CheckBox Content="Run app on startup" Margin="0,0,0,5"
+							  IsChecked="{Binding Settings.RunOnStartUp}"/>
+					<CheckBox Content="Use hotkeys"
+							  IsChecked="{Binding Settings.UseHotKeys}"/>
+				</StackPanel>
+			</TabItem>
+
+			<TabItem Header="Brightness Slider">
+				<StackPanel Margin="10" Orientation="Vertical">
+					<CheckBox Content="Use snapping for slider" Margin="0,0,0,5"
+							  IsChecked="{Binding Settings.SnapBrightness}"/>
+
+					<Grid Margin="0,0,0,5">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="20"/>
+						</Grid.ColumnDefinitions>
+
+						<TextBlock Text="Snapping interval"
+								   Margin="0,0,5,0"/>
+						<Slider Value="{Binding Settings.SnappingInterval}"
+								Margin="0,0,5,0"
+								Grid.Column="1"
+								Minimum="0"
+								Maximum="100"
+								Interval="1"/>
+						<TextBlock Text="{Binding Settings.SnappingInterval}"
+								   HorizontalAlignment="Right"
+								   Grid.Column="2"/>
+					</Grid>
 				</StackPanel>
 			</TabItem>
 		</TabControl>
 
 		<StackPanel Orientation="Horizontal" Margin="10"
 					HorizontalAlignment="Right" VerticalAlignment="Bottom">
-			<Button Content="Use default settings" Padding="15,5" Margin="0,0,10,0"/>
-			<Button Content="Save settings" Padding="15,5" Command="{Binding SaveSettingsCommand}"/>
+			<Button Content="Use default settings" Padding="15,4" Margin="0,0,10,0"/>
+			<Button Content="Save settings" Padding="15,4" Command="{Binding SaveSettingsCommand}"/>
 		</StackPanel>
 	</Grid>
 </Window>
