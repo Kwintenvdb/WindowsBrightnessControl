@@ -2,6 +2,7 @@
 using System.Windows.Interop;
 using WindowsBrightnessControl.HotKey;
 using WindowsBrightnessControl.Service;
+using WindowsBrightnessControl.View;
 using WindowsBrightnessControl.ViewModel;
 
 namespace WindowsBrightnessControl

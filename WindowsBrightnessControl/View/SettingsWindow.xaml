@@ -1,0 +1,31 @@
+﻿<Window x:Class="WindowsBrightnessControl.View.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Windows Brightness Control Settings" Height="300" Width="300"
+		ResizeMode="NoResize">
+	<Grid>
+		<TabControl TabStripPlacement="Top">
+			<TabItem Header="General">
+				<StackPanel Margin="10" Orientation="Vertical">
+					<StackPanel.Resources>
+						<Style TargetType="{x:Type CheckBox}">
+							<Setter Property="Margin" Value="0,0,0,5"/>
+						</Style>
+					</StackPanel.Resources>
+					
+					<CheckBox Content="Run app on startup"/>
+					<CheckBox Content="Use hotkeys"/>
+				</StackPanel>
+			</TabItem>
+		</TabControl>
+
+		<StackPanel Orientation="Horizontal" Margin="10"
+					HorizontalAlignment="Right" VerticalAlignment="Bottom">
+			<Button Content="Use default settings" Padding="15,5" Margin="0,0,10,0"/>
+			<Button Content="Save settings" Padding="15,5"/>
+		</StackPanel>
+	</Grid>
+</Window>
