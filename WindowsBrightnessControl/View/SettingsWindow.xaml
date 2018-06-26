@@ -16,8 +16,8 @@
 						</Style>
 					</StackPanel.Resources>
 					
-					<CheckBox Content="Run app on startup"/>
-					<CheckBox Content="Use hotkeys"/>
+					<CheckBox Content="Run app on startup" IsChecked="{Binding Settings.RunOnStartUp}"/>
+					<CheckBox Content="Use hotkeys" IsChecked="{Binding Settings.UseHotKeys}"/>
 				</StackPanel>
 			</TabItem>
 		</TabControl>
@@ -25,7 +25,7 @@
 		<StackPanel Orientation="Horizontal" Margin="10"
 					HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="Use default settings" Padding="15,5" Margin="0,0,10,0"/>
-			<Button Content="Save settings" Padding="15,5"/>
+			<Button Content="Save settings" Padding="15,5" Command="{Binding SaveSettingsCommand}"/>
 		</StackPanel>
 	</Grid>
 </Window>

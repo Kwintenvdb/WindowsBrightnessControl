@@ -1,14 +1,26 @@
 ﻿using WindowsBrightnessControl.Model;
+using WindowsBrightnessControl.Service;
 
 namespace WindowsBrightnessControl.ViewModel
 {
 	public class SettingsViewModel : ObservableObject
 	{
-		private Settings _settings;
+		public Settings Settings { get; private set; }
+		public Command SaveSettingsCommand { get; private set; }
 
-		public SettingsViewModel(Settings settings)
+		private readonly ISettingsProvider _settingsProvider;
+
+		public SettingsViewModel(ISettingsProvider settingsProvider)
 		{
-			_settings = settings;
+			_settingsProvider = settingsProvider;
+			Settings = settingsProvider.GetSettings();
+			// Add settings dirty check func for CanExecute.
+			SaveSettingsCommand = new Command(SaveSettings);
+		}
+
+		public void SaveSettings()
+		{
+			_settingsProvider.SaveSettings(Settings);
 		}
 	}
 }

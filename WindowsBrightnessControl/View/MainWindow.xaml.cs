@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using WindowsBrightnessControl.Service;
+using WindowsBrightnessControl.ViewModel;
 
 namespace WindowsBrightnessControl.View
 {
@@ -14,7 +16,10 @@ namespace WindowsBrightnessControl.View
 
 		public void ShowSettingsWindow()
 		{
+			var settingsProvider = new SettingsProvider();
+			var viewModel = new SettingsViewModel(settingsProvider);
 			var window = new SettingsWindow();
+			window.DataContext = viewModel;
 			window.Show();
 		}
 	}
