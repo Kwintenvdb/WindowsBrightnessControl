@@ -48,7 +48,7 @@
 
 		<StackPanel Orientation="Horizontal" Margin="10"
 					HorizontalAlignment="Right" VerticalAlignment="Bottom">
-			<Button Content="Use default settings" Padding="15,4" Margin="0,0,10,0"/>
+			<Button Content="Use default settings" Padding="15,4" Margin="0,0,10,0" Command="{Binding ResetSettingsCommand}"/>
 			<Button Content="Save settings" Padding="15,4" Command="{Binding SaveSettingsCommand}"/>
 		</StackPanel>
 	</Grid>

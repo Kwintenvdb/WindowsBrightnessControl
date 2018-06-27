@@ -9,5 +9,9 @@ namespace WindowsBrightnessControl.Service
 
 		Settings GetSettings();
 		void SaveSettings(Settings settings);
+		/// <summary>
+		/// Revert to default settings.
+		/// </summary>
+		void ResetSettings();
 	}
 }

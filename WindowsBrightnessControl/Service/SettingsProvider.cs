@@ -32,5 +32,11 @@ namespace WindowsBrightnessControl.Service
 
 			SettingsChanged.Invoke();
 		}
+
+		public void ResetSettings()
+		{
+			UserSettings.Reset();
+			SettingsChanged?.Invoke();
+		}
 	}
 }

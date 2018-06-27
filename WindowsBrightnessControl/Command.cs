@@ -31,5 +31,10 @@ namespace WindowsBrightnessControl
 				throw new InvalidOperationException("Command must have non-null execute action.");
 			_execute.Invoke();
 		}
+
+		public void RaiseCanExecuteChanged()
+		{
+			CanExecuteChanged?.Invoke(this, new EventArgs());
+		}
 	}
 }
