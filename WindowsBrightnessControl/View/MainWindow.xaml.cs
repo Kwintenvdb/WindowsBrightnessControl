@@ -5,8 +5,6 @@ namespace WindowsBrightnessControl.View
 {
     public partial class MainWindow : Window
     {
-		public Command ShowSettingsCommand { get; private set; }
-
 		private MainViewModel MainViewModel
 		{
 			get { return (MainViewModel)DataContext; }
@@ -17,7 +15,6 @@ namespace WindowsBrightnessControl.View
 		public MainWindow()
         {
             InitializeComponent();
-			ShowSettingsCommand = new Command(ShowSettingsWindow);
 
 			int marginTop = 80;
 			this.Top = SystemParameters.WorkArea.Height - this.ActualHeight - marginTop;
@@ -26,7 +23,7 @@ namespace WindowsBrightnessControl.View
 			this.Left = SystemParameters.WorkArea.Width - this.Width - marginLeft;
 		}
 
-		public void ShowSettingsWindow()
+		public void ShowSettingsWindow(object sender, RoutedEventArgs args)
 		{
 			if (!_settingsShowing)
 			{

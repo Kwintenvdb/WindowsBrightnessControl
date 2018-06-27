@@ -34,16 +34,14 @@
 		<tb:TaskbarIcon x:Name="myNotifyIcon"
                     Visibility="Visible"
                     ToolTipText="Windows Brightness Control"
-                    MenuActivation="LeftOrRightClick"
-                    PopupActivation="DoubleClick"
-					LeftClickCommand="{Binding ShowSettingsCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                    MenuActivation="RightClick"
 					IconSource="/Resources/Icons/brightness.ico">
-			<!--<tb:TaskbarIcon.ContextMenu>
+			<tb:TaskbarIcon.ContextMenu>
 				<ContextMenu>
-					<MenuItem Header="Menu item"/>
-					<MenuItem Header="Menu item"/>
+					<MenuItem Header="Settings..." Click="ShowSettingsWindow"/>
+					<MenuItem Header="Exit" Command="{Binding ExitApplicationCommand}"/>
 				</ContextMenu>
-			</tb:TaskbarIcon.ContextMenu>-->
+			</tb:TaskbarIcon.ContextMenu>
 		</tb:TaskbarIcon>
 
 		<Image Grid.Column="0" HorizontalAlignment="Left"
