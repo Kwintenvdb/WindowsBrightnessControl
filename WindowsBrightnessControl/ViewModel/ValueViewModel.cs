@@ -5,12 +5,8 @@
 		private T _value;
 		public T Value
 		{
-			get { return _value; }
-			set
-			{
-				_value = value;
-				RaisePropertyChanged(nameof(Value));
-			}
+			get => _value;
+			set => SetField(ref _value, value);
 		}
 
 		public ValueViewModel(T value)

@@ -16,8 +16,16 @@
 	<Window.Background>
 		<SolidColorBrush Color="Black" Opacity="0.75"/>
 	</Window.Background>
+	<Window.Resources>
+		<BooleanToVisibilityConverter x:Key="BoolToVis"/>
+	</Window.Resources>
+	<Window.Visibility>
+		<Binding Path="IsWindowVisible.Value" Converter="{StaticResource BoolToVis}" Mode="TwoWay"/>
+	</Window.Visibility>
+
 	<Grid Margin="18">
 		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="35"/>
 			<ColumnDefinition Width="*"/>
 			<ColumnDefinition Width="38"/>
 		</Grid.ColumnDefinitions>
@@ -38,8 +46,12 @@
 			</tb:TaskbarIcon.ContextMenu>-->
 		</tb:TaskbarIcon>
 
+		<Image Grid.Column="0" HorizontalAlignment="Left"
+			   Source="/Resources/Icons/brightness.ico"
+			   Width="26"/>
+
 		<Slider VerticalAlignment="Center" HorizontalAlignment="Stretch"
-				Grid.Column="0"
+				Grid.Column="1"
 				Minimum="0"
 				Maximum="100"
 				Delay="0"
@@ -49,6 +61,6 @@
 
 		<TextBlock Text="{Binding Monitor.Brightness}" Foreground="White"
 				   HorizontalAlignment="Right" VerticalAlignment="Center"
-				   Grid.Column="1" FontSize="18"/>
+				   Grid.Column="2" FontSize="18"/>
 	</Grid>
 </Window>

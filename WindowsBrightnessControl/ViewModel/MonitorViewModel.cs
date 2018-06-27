@@ -12,6 +12,8 @@ namespace WindowsBrightnessControl.ViewModel
 
 		private IntPtr MonitorPtr => _monitor.hPhysicalMonitor;
 
+		public event Action BrightnessChanged;
+
 		public MonitorViewModel(PhysicalMonitor monitor, IMonitorService monitorService)
 		{
 			_monitor = monitor;
@@ -35,9 +37,15 @@ namespace WindowsBrightnessControl.ViewModel
 				{
 					_cachedBrightness = newBrightness;
 					RaisePropertyChanged(nameof(Brightness));
+					OnBrightnessChanged();
 					_monitorService.SetMonitorBrightness(MonitorPtr, (uint)newBrightness);
 				}
 			}
+		}
+
+		private void OnBrightnessChanged()
+		{
+			BrightnessChanged?.Invoke();
 		}
 	}
 }
