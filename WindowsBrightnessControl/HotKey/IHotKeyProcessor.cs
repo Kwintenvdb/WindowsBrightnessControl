@@ -6,9 +6,9 @@ namespace WindowsBrightnessControl.HotKey
 	public interface IHotKeyProcessor
 	{
 		/// <summary>
-		/// Starts listening for hotkey events. Requires a valid Window Handle.
+		/// Starts listening for hotkey events.
 		/// </summary>
-		void StartHotKeyProcessor(IntPtr windowHandle);
+		void StartHotKeyProcessor();
 		/// <summary>
 		/// Adds a hotkey mapped to a specified action.
 		/// </summary>

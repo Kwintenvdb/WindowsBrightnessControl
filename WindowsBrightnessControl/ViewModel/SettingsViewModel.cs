@@ -1,4 +1,5 @@
-﻿using WindowsBrightnessControl.Model;
+﻿using System;
+using WindowsBrightnessControl.Model;
 using WindowsBrightnessControl.Service;
 
 namespace WindowsBrightnessControl.ViewModel
@@ -61,6 +62,8 @@ namespace WindowsBrightnessControl.ViewModel
 			get => !_oldSettings.Equals(_settings);
 		}
 
+		public event Action SettingsChanged;
+
 		private Settings _oldSettings;
 		private Settings _settings;
 		private readonly ISettingsProvider _settingsProvider;
@@ -104,6 +107,8 @@ namespace WindowsBrightnessControl.ViewModel
 			RaisePropertyChanged(nameof(UseHotKeys));
 			RaisePropertyChanged(nameof(SnapBrightness));
 			RaisePropertyChanged(nameof(SnappingInterval));
+
+			SettingsChanged?.Invoke();
 		}
 	}
 }

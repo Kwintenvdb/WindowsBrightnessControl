@@ -20,12 +20,16 @@ namespace WindowsBrightnessControl.HotKey
 			public Action Action { get; set; }
 		}
 
-		private HwndSource _windowHandleSource;
+		private readonly HwndSource _windowHandleSource;
 		private readonly Dictionary<int, HotKey> _hotKeys = new Dictionary<int, HotKey>();
 
-		public void StartHotKeyProcessor(IntPtr windowHandle)
+		public HotKeyProcessor(IntPtr windowHandle)
 		{
 			_windowHandleSource = HwndSource.FromHwnd(windowHandle);
+		}
+
+		public void StartHotKeyProcessor()
+		{
 			_windowHandleSource.AddHook(HwndHook);
 		}
 

@@ -68,6 +68,7 @@
     <Compile Include="Service\ISettingsProvider.cs" />
     <Compile Include="Service\MonitorService.cs" />
     <Compile Include="Service\SettingsProvider.cs" />
+    <Compile Include="ViewModel\HotKeyManagerViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MonitorViewModel.cs" />
     <Compile Include="ViewModel\ObservableObject.cs" />

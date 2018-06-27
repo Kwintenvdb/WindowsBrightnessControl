@@ -14,7 +14,8 @@ namespace WindowsBrightnessControl.ViewModel
 
 		public ValueViewModel<bool> IsWindowVisible { get; private set; } = new ValueViewModel<bool>(false);
 
-		private readonly IHotKeyProcessor _hotKeyProcessor;
+		private readonly HotKeyManagerViewModel _hotKeyManager;
+		//private readonly IHotKeyProcessor _hotKeyProcessor;
 		private readonly ISettingsProvider _settingsProvider;
 
 		private DispatcherTimer _visibilityTimer;
@@ -27,8 +28,11 @@ namespace WindowsBrightnessControl.ViewModel
 			Settings = new SettingsViewModel(settingsProvider);
 
 			_settingsProvider = settingsProvider;
-			_hotKeyProcessor = hotKeyProcessor;
-			ConfigureHotKeys(hotKeyProcessor);
+
+			_hotKeyManager = new HotKeyManagerViewModel(hotKeyProcessor, this);
+			//ConfigureHotKeys(hotKeyProcessor);
+			//hotKeyProcessor.StartHotKeyProcessor();
+			//_hotKeyProcessor = hotKeyProcessor;
 		}
 
 		private void OnBrightnessChanged()
@@ -55,18 +59,18 @@ namespace WindowsBrightnessControl.ViewModel
 			timer.Tick -= OnWindowTimerTick;
 		}
 
-		private void ConfigureHotKeys(IHotKeyProcessor hotKeyProcessor)
-		{
-			hotKeyProcessor.AddHotKey(ModifierKeys.Alt, Key.F10, () =>
-			{
-				Monitor.Brightness += Settings.SnappingInterval;
-			});
+		//private void ConfigureHotKeys(IHotKeyProcessor hotKeyProcessor)
+		//{
+		//	hotKeyProcessor.AddHotKey(ModifierKeys.Alt, Key.F10, () =>
+		//	{
+		//		Monitor.Brightness += Settings.SnappingInterval;
+		//	});
 
-			hotKeyProcessor.AddHotKey(ModifierKeys.Alt, Key.F9, () =>
-			{
-				Monitor.Brightness -= Settings.SnappingInterval;
-			});
-		}
+		//	hotKeyProcessor.AddHotKey(ModifierKeys.Alt, Key.F9, () =>
+		//	{
+		//		Monitor.Brightness -= Settings.SnappingInterval;
+		//	});
+		//}
 
 		public SettingsViewModel GetEditingSettingsViewModel()
 		{
