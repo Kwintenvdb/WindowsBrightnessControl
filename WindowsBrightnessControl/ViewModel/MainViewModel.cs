@@ -8,31 +8,38 @@ namespace WindowsBrightnessControl.ViewModel
 	public class MainViewModel : ObservableObject
 	{
 		public MonitorViewModel Monitor { get; private set; }
-		public IHotKeyProcessor HotKeyProcessor { get; private set; }
+		public SettingsViewModel Settings { get; private set; }
 
-		public MainViewModel(IMonitorService monitorService, IHotKeyProcessor hotKeyProcessor)
+		private readonly IHotKeyProcessor _hotKeyProcessor;
+		private readonly ISettingsProvider _settingsProvider;
+
+		public MainViewModel(IMonitorService monitorService, IHotKeyProcessor hotKeyProcessor, ISettingsProvider settingsProvider)
 		{
 			var monitors = monitorService.GetPhysicalMonitors();
 			Monitor = new MonitorViewModel(monitors.First(), monitorService);
+			Settings = new SettingsViewModel(settingsProvider);
 
-			HotKeyProcessor = hotKeyProcessor;
+			_settingsProvider = settingsProvider;
+			_hotKeyProcessor = hotKeyProcessor;
 			ConfigureHotKeys(hotKeyProcessor);
 		}
 
 		private void ConfigureHotKeys(IHotKeyProcessor hotKeyProcessor)
 		{
-			// Retrieve from settings later.
-			const int brightnessInterval = 10;
-
 			hotKeyProcessor.AddHotKey(ModifierKeys.Alt, Key.F10, () =>
 			{
-				Monitor.Brightness += brightnessInterval;
+				Monitor.Brightness += Settings.SnappingInterval;
 			});
 
 			hotKeyProcessor.AddHotKey(ModifierKeys.Alt, Key.F9, () =>
 			{
-				Monitor.Brightness -= brightnessInterval;
+				Monitor.Brightness -= Settings.SnappingInterval;
 			});
+		}
+
+		public SettingsViewModel GetEditingSettingsViewModel()
+		{
+			return new SettingsViewModel(_settingsProvider);
 		}
 	}
 }

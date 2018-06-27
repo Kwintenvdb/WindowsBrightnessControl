@@ -11,11 +11,17 @@
 		Topmost="True"
 		SizeToContent="Height"
 		AllowsTransparency="True"
+		WindowStartupLocation="Manual"
 		ResizeMode="NoResize">
 	<Window.Background>
 		<SolidColorBrush Color="Black" Opacity="0.75"/>
 	</Window.Background>
-	<Grid>
+	<Grid Margin="18">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="36"/>
+		</Grid.ColumnDefinitions>
+
 		<!--Testing taskbar icon...-->
 		<tb:TaskbarIcon x:Name="myNotifyIcon"
                     Visibility="Visible"
@@ -33,11 +39,16 @@
 		</tb:TaskbarIcon>
 
 		<Slider VerticalAlignment="Center" HorizontalAlignment="Stretch"
+				Grid.Column="0"
 				Minimum="0"
 				Maximum="100"
 				Delay="0"
-				TickFrequency="10"
+				TickFrequency="{Binding Settings.SnappingInterval}"
 				IsSnapToTickEnabled="True"
-				Value="{Binding Monitor.Brightness, Mode=TwoWay}" Margin="12"/>
+				Value="{Binding Monitor.Brightness, Mode=TwoWay}"/>
+
+		<TextBlock Text="{Binding Monitor.Brightness}" Foreground="White"
+				   HorizontalAlignment="Right" VerticalAlignment="Center"
+				   Grid.Column="1" FontSize="18"/>
 	</Grid>
 </Window>

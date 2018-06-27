@@ -1,14 +1,13 @@
 ﻿namespace WindowsBrightnessControl.Model
 {
-	// Use application settings? Might be easier.
-	public class Settings
+	public struct Settings
 	{
 		// Use intervals?
-		public bool SnapBrightness { get; set; } = true;
-		public int SnappingInterval { get; set; } = 5;
+		public bool SnapBrightness;
+		public int SnappingInterval;
 
 		// Application settings
-		public bool RunOnStartUp { get; set; } = true;
-		public bool UseHotKeys { get; set; } = true;
+		public bool RunOnStartUp;
+		public bool UseHotKeys;
 	}
 }

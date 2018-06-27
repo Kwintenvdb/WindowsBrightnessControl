@@ -1,9 +1,12 @@
-﻿using WindowsBrightnessControl.Model;
+﻿using System;
+using WindowsBrightnessControl.Model;
 
 namespace WindowsBrightnessControl.Service
 {
 	public interface ISettingsProvider
 	{
+		event Action SettingsChanged;
+
 		Settings GetSettings();
 		void SaveSettings(Settings settings);
 	}

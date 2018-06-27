@@ -1,9 +1,12 @@
-﻿using WindowsBrightnessControl.Model;
+﻿using System;
+using WindowsBrightnessControl.Model;
 
 namespace WindowsBrightnessControl.Service
 {
 	public class SettingsProvider : ISettingsProvider
 	{
+		public event Action SettingsChanged;
+
 		private Properties.Settings UserSettings => Properties.Settings.Default;
 
 		public Settings GetSettings()
@@ -26,6 +29,8 @@ namespace WindowsBrightnessControl.Service
 			userSettings.SnappingInterval = settings.SnappingInterval;
 			userSettings.UseHotKeys = settings.UseHotKeys;
 			userSettings.Save();
+
+			SettingsChanged.Invoke();
 		}
 	}
 }

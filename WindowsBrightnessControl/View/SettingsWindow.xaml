@@ -12,16 +12,16 @@
 			<TabItem Header="Application">
 				<StackPanel Margin="10" Orientation="Vertical">
 					<CheckBox Content="Run app on startup" Margin="0,0,0,5"
-							  IsChecked="{Binding Settings.RunOnStartUp}"/>
+							  IsChecked="{Binding RunOnStartUp}"/>
 					<CheckBox Content="Use hotkeys"
-							  IsChecked="{Binding Settings.UseHotKeys}"/>
+							  IsChecked="{Binding UseHotKeys}"/>
 				</StackPanel>
 			</TabItem>
 
 			<TabItem Header="Brightness Slider">
 				<StackPanel Margin="10" Orientation="Vertical">
 					<CheckBox Content="Use snapping for slider" Margin="0,0,0,5"
-							  IsChecked="{Binding Settings.SnapBrightness}"/>
+							  IsChecked="{Binding SnapBrightness}"/>
 
 					<Grid Margin="0,0,0,5">
 						<Grid.ColumnDefinitions>
@@ -32,13 +32,13 @@
 
 						<TextBlock Text="Snapping interval"
 								   Margin="0,0,5,0"/>
-						<Slider Value="{Binding Settings.SnappingInterval}"
+						<Slider Value="{Binding SnappingInterval}"
 								Margin="0,0,5,0"
 								Grid.Column="1"
-								Minimum="0"
+								Minimum="1"
 								Maximum="100"
 								Interval="1"/>
-						<TextBlock Text="{Binding Settings.SnappingInterval}"
+						<TextBlock Text="{Binding SnappingInterval}"
 								   HorizontalAlignment="Right"
 								   Grid.Column="2"/>
 					</Grid>
