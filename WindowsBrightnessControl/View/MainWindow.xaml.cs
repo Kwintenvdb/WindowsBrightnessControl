@@ -12,6 +12,8 @@ namespace WindowsBrightnessControl.View
 			get { return (MainViewModel)DataContext; }
 		}
 
+		private bool _settingsShowing;
+
 		public MainWindow()
         {
             InitializeComponent();
@@ -26,9 +28,14 @@ namespace WindowsBrightnessControl.View
 
 		public void ShowSettingsWindow()
 		{
-			var window = new SettingsWindow();
-			window.DataContext = MainViewModel.GetEditingSettingsViewModel();
-			window.Show();
+			if (!_settingsShowing)
+			{
+				var window = new SettingsWindow();
+				window.DataContext = MainViewModel.GetEditingSettingsViewModel();
+				window.Show();
+				window.Closed += (o, e) => _settingsShowing = false;
+				_settingsShowing = true;
+			}
 		}
 	}
 }

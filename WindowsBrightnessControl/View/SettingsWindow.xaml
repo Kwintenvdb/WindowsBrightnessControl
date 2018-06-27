@@ -7,6 +7,9 @@
         Title="Windows Brightness Control Settings" Height="300" Width="350"
 		WindowStartupLocation="CenterScreen"
 		ResizeMode="NoResize">
+	<Window.Resources>
+		<BooleanToVisibilityConverter x:Key="BoolToVis"/>
+	</Window.Resources>
 	<Grid>
 		<TabControl TabStripPlacement="Top">
 			<TabItem Header="Application">
@@ -15,6 +18,8 @@
 							  IsChecked="{Binding RunOnStartUp}"/>
 					<CheckBox Content="Use hotkeys"
 							  IsChecked="{Binding UseHotKeys}"/>
+					<TextBlock Text="Press Alt+F9 or Alt+F10 to decrease and increase brightness." TextWrapping="Wrap"
+							   Visibility="{Binding UseHotKeys, Converter={StaticResource BoolToVis}}"/>
 				</StackPanel>
 			</TabItem>
 
