@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.CommandWpf;
+using System;
 using WindowsBrightnessControl.Model;
 using WindowsBrightnessControl.Service;
 
@@ -6,8 +7,8 @@ namespace WindowsBrightnessControl.ViewModel
 {
 	public class SettingsViewModel : ObservableObject
 	{
-		public Command SaveSettingsCommand { get; private set; }
-		public Command ResetSettingsCommand { get; private set; }
+		public RelayCommand SaveSettingsCommand { get; private set; }
+		public RelayCommand ResetSettingsCommand { get; private set; }
 
 		public bool RunOnStartUp
 		{
@@ -74,8 +75,8 @@ namespace WindowsBrightnessControl.ViewModel
 			_settingsProvider.SettingsChanged += OnSettingsChanged;
 			GetSettings();
 
-			SaveSettingsCommand = new Command(SaveSettings, () => SettingsDirty);
-			ResetSettingsCommand = new Command(ResetSettings);
+			SaveSettingsCommand = new RelayCommand(SaveSettings, () => SettingsDirty);
+			ResetSettingsCommand = new RelayCommand(ResetSettings);
 		}
 
 		private void GetSettings()

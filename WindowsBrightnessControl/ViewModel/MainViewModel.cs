@@ -1,6 +1,8 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.CommandWpf;
+using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 using WindowsBrightnessControl.HotKey;
 using WindowsBrightnessControl.Service;
@@ -14,7 +16,9 @@ namespace WindowsBrightnessControl.ViewModel
 
 		public ValueViewModel<bool> IsWindowVisible { get; private set; } = new ValueViewModel<bool>(false);
 
-		public Command ExitApplicationCommand { get; private set; }
+		public RelayCommand<MouseWheelEventArgs> MouseWheelCommand { get; private set; }
+		public RelayCommand ShowWindowCommand { get; private set; }
+		public RelayCommand ExitApplicationCommand { get; private set; }
 
 		private readonly HotKeyManagerViewModel _hotKeyManager;
 		//private readonly IHotKeyProcessor _hotKeyProcessor;
@@ -29,13 +33,36 @@ namespace WindowsBrightnessControl.ViewModel
 			Monitor.BrightnessChanged += OnBrightnessChanged;
 			Settings = new SettingsViewModel(settingsProvider);
 
-			ExitApplicationCommand = new Command(ExitApplication);
+			MouseWheelCommand = new RelayCommand<MouseWheelEventArgs>(OnMouseWheelScroll);
+			ShowWindowCommand = new RelayCommand(ShowWindow);
+			ExitApplicationCommand = new RelayCommand(ExitApplication);
 
 			_settingsProvider = settingsProvider;
 			_hotKeyManager = new HotKeyManagerViewModel(hotKeyProcessor, this);
 		}
 
 		private void OnBrightnessChanged()
+		{
+			ShowWindow();
+		}
+
+		// The MouseWheelEventArgs break MVVM pattern but requires too much
+		// boilerplate implementation effort to get rid of.
+		private void OnMouseWheelScroll(MouseWheelEventArgs args)
+		{
+			int direction = Math.Sign(args.Delta);
+			if (direction > 0)
+			{
+				// This sort of thing is repeated quite often... Refactor?
+				Monitor.Brightness += Settings.SnappingInterval;
+			}
+			else
+			{
+				Monitor.Brightness -= Settings.SnappingInterval;
+			}
+		}
+
+		private void ShowWindow()
 		{
 			IsWindowVisible.Value = true;
 

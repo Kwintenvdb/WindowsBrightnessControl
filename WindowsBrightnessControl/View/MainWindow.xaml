@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:tb="http://www.hardcodet.net/taskbar"
+		xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+		xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
         mc:Ignorable="d"
 		Name="mainWindow"
 		Width="320" Height="Auto"
@@ -23,6 +25,12 @@
 		<Binding Path="IsWindowVisible.Value" Converter="{StaticResource BoolToVis}" Mode="TwoWay"/>
 	</Window.Visibility>
 
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="PreviewMouseWheel">
+			<cmd:EventToCommand Command="{Binding MouseWheelCommand}" PassEventArgsToCommand="True"/>
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
+
 	<Grid Margin="18">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="35"/>
@@ -35,7 +43,9 @@
                     Visibility="Visible"
                     ToolTipText="Windows Brightness Control"
                     MenuActivation="RightClick"
+					LeftClickCommand="{Binding ShowWindowCommand}"
 					IconSource="/Resources/Icons/brightness.ico">
+			
 			<tb:TaskbarIcon.ContextMenu>
 				<ContextMenu>
 					<MenuItem Header="Settings..." Click="ShowSettingsWindow"/>
@@ -55,7 +65,8 @@
 				Delay="0"
 				TickFrequency="{Binding Settings.SnappingInterval}"
 				IsSnapToTickEnabled="True"
-				Value="{Binding Monitor.Brightness, Mode=TwoWay}"/>
+				Value="{Binding Monitor.Brightness, Mode=TwoWay}">
+		</Slider>
 
 		<TextBlock Text="{Binding Monitor.Brightness}" Foreground="White"
 				   HorizontalAlignment="Right" VerticalAlignment="Center"
