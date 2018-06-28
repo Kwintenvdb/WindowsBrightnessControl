@@ -42,6 +42,7 @@ namespace WindowsBrightnessControl.ViewModel
 
 			_settingsProvider = settingsProvider;
 			_startupService = startupService;
+			_startupService.RunAppOnStartup(Settings.RunOnStartUp);
 			_hotKeyManager = new HotKeyManagerViewModel(hotKeyProcessor, this);
 		}
 

@@ -7,17 +7,28 @@ namespace WindowsBrightnessControl.Service
 
 	public class RegistryStartupService : IStartupService
 	{
-		public bool AppRunsOnStartup => false;
+		public bool AppRunsOnStartup
+		{
+			get
+			{
+				using (RegistryKey key = Registry.CurrentUser.OpenSubKey(REGISTRY_KEY, true))
+				{
+					string value = key.GetValue(KEY_NAME) as string;
+					return value == AssemblyLocation;
+				}
+			}
+		}
 
 		private string AssemblyLocation => Assembly.GetEntryAssembly().Location.ToString();
 
+		private const string REGISTRY_KEY = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
 		private const string KEY_NAME = "WindowsBrightnessControl";
 
 		public void RunAppOnStartup(bool runOnStartup)
 		{
-			//if (AppRunsOnStartup != runOnStartup)
+			if (AppRunsOnStartup != runOnStartup)
 			{
-				using (RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
+				using (RegistryKey key = Registry.CurrentUser.OpenSubKey(REGISTRY_KEY, true))
 				{
 					if (runOnStartup)
 					{
