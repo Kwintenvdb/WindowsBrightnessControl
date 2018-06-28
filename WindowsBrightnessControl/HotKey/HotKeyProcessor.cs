@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using System.Windows.Interop;
+using WindowsBrightnessControl.Util;
 using WindowsBrightnessControl.WinAPI;
 
 namespace WindowsBrightnessControl.HotKey
@@ -14,10 +15,18 @@ namespace WindowsBrightnessControl.HotKey
 			{
 				Id = id;
 				Action = action;
+				_throttler = new Throttler(0.05);
 			}
 
 			public int Id { get; set; }
 			public Action Action { get; set; }
+
+			private readonly Throttler _throttler;
+
+			public bool TryExecuteAction()
+			{
+				return _throttler.TryExecute(Action);
+			}
 		}
 
 		private readonly HwndSource _windowHandleSource;
@@ -60,7 +69,7 @@ namespace WindowsBrightnessControl.HotKey
 				HotKey hotKey;
 				if (_hotKeys.TryGetValue(id, out hotKey))
 				{
-					hotKey.Action?.Invoke();
+					hotKey.TryExecuteAction();
 					handled = true;
 				}
 			}

@@ -88,6 +88,7 @@
     <Compile Include="Service\MonitorService.cs" />
     <Compile Include="Service\SettingsProvider.cs" />
     <Compile Include="Service\RegistryStartupService.cs" />
+    <Compile Include="Util\Throttler.cs" />
     <Compile Include="ViewModel\HotKeyManagerViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MonitorViewModel.cs" />
