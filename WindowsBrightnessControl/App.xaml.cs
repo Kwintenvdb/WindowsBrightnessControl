@@ -19,11 +19,12 @@ namespace WindowsBrightnessControl
 			
 			// Services
 			IMonitorService service = new MonitorService();
-			ISettingsProvider settingsProvider = new SettingsProvider();
 			IHotKeyProcessor hotKeyProcessor = new HotKeyProcessor(windowHandle);
+			ISettingsProvider settingsProvider = new SettingsProvider();
+			IStartupService startupService = new RegistryStartupService();
 
 			// Set window DataContext and show.
-			window.DataContext = new MainViewModel(service, hotKeyProcessor, settingsProvider);
+			window.DataContext = new MainViewModel(service, hotKeyProcessor, settingsProvider, startupService);
 			window.Show();
 		}
 	}

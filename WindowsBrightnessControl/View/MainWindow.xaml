@@ -65,7 +65,7 @@
 				Delay="0"
 				TickFrequency="{Binding Settings.SnappingInterval}"
 				IsSnapToTickEnabled="True"
-				Value="{Binding Monitor.Brightness, Mode=TwoWay}">
+				Value="{Binding Monitor.Brightness, Mode=TwoWay}" Focusable="False" IsTabStop="False">
 		</Slider>
 
 		<TextBlock Text="{Binding Monitor.Brightness}" Foreground="White"

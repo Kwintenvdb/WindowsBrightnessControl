@@ -6,12 +6,17 @@
         mc:Ignorable="d"
         Title="Windows Brightness Control Settings" Height="300" Width="350"
 		WindowStartupLocation="CenterScreen"
-		ResizeMode="NoResize">
+		ResizeMode="NoResize" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
 	<Window.Resources>
 		<BooleanToVisibilityConverter x:Key="BoolToVis"/>
 	</Window.Resources>
-	<Grid>
-		<TabControl TabStripPlacement="Top">
+	<Grid Margin="5">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<TabControl TabStripPlacement="Top" Grid.Row="0" Margin="0,0,0,5">
 			<TabItem Header="Application">
 				<StackPanel Margin="10" Orientation="Vertical">
 					<CheckBox Content="Run app on startup" Margin="0,0,0,5"
@@ -51,10 +56,10 @@
 			</TabItem>
 		</TabControl>
 
-		<StackPanel Orientation="Horizontal" Margin="10"
+		<StackPanel Orientation="Horizontal" Margin="0" Grid.Row="1"
 					HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="Use default settings" Padding="15,4" Margin="0,0,10,0" Command="{Binding ResetSettingsCommand}"/>
-			<Button Content="Save settings" Padding="15,4" Command="{Binding SaveSettingsCommand}"/>
+			<Button Content="Save settings" Padding="15,4" Command="{Binding SaveSettingsCommand}" IsDefault="True"/>
 		</StackPanel>
 	</Grid>
 </Window>

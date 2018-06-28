@@ -23,27 +23,36 @@ namespace WindowsBrightnessControl.ViewModel
 		private readonly HotKeyManagerViewModel _hotKeyManager;
 		//private readonly IHotKeyProcessor _hotKeyProcessor;
 		private readonly ISettingsProvider _settingsProvider;
+		private readonly IStartupService _startupService;
 
 		private DispatcherTimer _visibilityTimer;
 
-		public MainViewModel(IMonitorService monitorService, IHotKeyProcessor hotKeyProcessor, ISettingsProvider settingsProvider)
+		public MainViewModel(IMonitorService monitorService, IHotKeyProcessor hotKeyProcessor, ISettingsProvider settingsProvider,
+			IStartupService startupService)
 		{
 			var monitors = monitorService.GetPhysicalMonitors();
 			Monitor = new MonitorViewModel(monitors.First(), monitorService);
 			Monitor.BrightnessChanged += OnBrightnessChanged;
 			Settings = new SettingsViewModel(settingsProvider);
+			Settings.SettingsChanged += OnSettingsChanged;
 
 			MouseWheelCommand = new RelayCommand<MouseWheelEventArgs>(OnMouseWheelScroll);
 			ShowWindowCommand = new RelayCommand(ShowWindow);
 			ExitApplicationCommand = new RelayCommand(ExitApplication);
 
 			_settingsProvider = settingsProvider;
+			_startupService = startupService;
 			_hotKeyManager = new HotKeyManagerViewModel(hotKeyProcessor, this);
 		}
 
 		private void OnBrightnessChanged()
 		{
 			ShowWindow();
+		}
+
+		private void OnSettingsChanged()
+		{
+			_startupService.RunAppOnStartup(Settings.RunOnStartUp);
 		}
 
 		// The MouseWheelEventArgs break MVVM pattern but requires too much
