@@ -95,6 +95,7 @@
     <Compile Include="ViewModel\ObservableObject.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\ValueViewModel.cs" />
+    <Compile Include="View\BrightnessWindow.cs" />
     <Compile Include="View\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>

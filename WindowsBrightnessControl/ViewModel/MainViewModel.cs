@@ -21,7 +21,6 @@ namespace WindowsBrightnessControl.ViewModel
 		public RelayCommand ExitApplicationCommand { get; private set; }
 
 		private readonly HotKeyManagerViewModel _hotKeyManager;
-		//private readonly IHotKeyProcessor _hotKeyProcessor;
 		private readonly ISettingsProvider _settingsProvider;
 		private readonly IStartupService _startupService;
 
