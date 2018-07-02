@@ -30,9 +30,6 @@
 
 			<TabItem Header="Brightness Slider">
 				<StackPanel Margin="10" Orientation="Vertical">
-					<CheckBox Content="Use snapping for slider" Margin="0,0,0,5"
-							  IsChecked="{Binding SnapBrightness}"/>
-
 					<Grid Margin="0,0,0,5">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="Auto"/>
@@ -40,7 +37,7 @@
 							<ColumnDefinition Width="20"/>
 						</Grid.ColumnDefinitions>
 
-						<TextBlock Text="Snapping interval"
+						<TextBlock Text="Brightness interval"
 								   Margin="0,0,5,0"/>
 						<Slider Value="{Binding SnappingInterval}"
 								Margin="0,0,5,0"
@@ -52,6 +49,9 @@
 								   HorizontalAlignment="Right"
 								   Grid.Column="2"/>
 					</Grid>
+					
+					<CheckBox Content="Use snapping for slider" Margin="0,0,0,5"
+							  IsChecked="{Binding SnapBrightness}"/>
 				</StackPanel>
 			</TabItem>
 		</TabControl>

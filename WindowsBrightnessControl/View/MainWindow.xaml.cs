@@ -16,8 +16,6 @@ namespace WindowsBrightnessControl.View
 			this.Top = SystemParameters.WorkArea.Height - this.ActualHeight - marginTop;
 			int marginLeft = 30;
 			this.Left = SystemParameters.WorkArea.Width - this.Width - marginLeft;
-
-			this.Visibility = Visibility.Collapsed;
 		}
 
 		protected override void OnWindowVisibleChanged(bool visible)

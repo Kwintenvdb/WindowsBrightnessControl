@@ -60,7 +60,8 @@
 				Maximum="100"
 				Delay="0"
 				TickFrequency="{Binding Settings.SnappingInterval}"
-				IsSnapToTickEnabled="True"
+				TickPlacement="BottomRight"
+				IsSnapToTickEnabled="{Binding Settings.SnapBrightness}"
 				Value="{Binding Monitor.Brightness, Mode=TwoWay}" Focusable="False" IsTabStop="False">
 		</Slider>
 
