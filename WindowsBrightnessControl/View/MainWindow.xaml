@@ -16,16 +16,10 @@
 		AllowsTransparency="True"
 		WindowStartupLocation="Manual"
 		ResizeMode="NoResize"
-		IsWindowVisible="{Binding IsWindowVisible}">
+		IsWindowVisible="{Binding IsWindowVisible.Value, Mode=OneWay}">
 	<Window.Background>
 		<SolidColorBrush Color="Black" Opacity="0.75"/>
 	</Window.Background>
-	<Window.Resources>
-		<BooleanToVisibilityConverter x:Key="BoolToVis"/>
-	</Window.Resources>
-	<!--<Window.Visibility>
-		<Binding Path="IsWindowVisible.Value" Converter="{StaticResource BoolToVis}" Mode="TwoWay"/>
-	</Window.Visibility>-->
 
 	<i:Interaction.Triggers>
 		<i:EventTrigger EventName="PreviewMouseWheel">

@@ -6,7 +6,7 @@ namespace WindowsBrightnessControl.View
     public class BrightnessWindow : Window
     {
 		public static readonly DependencyProperty IsWindowVisibleProperty = DependencyProperty.Register("IsWindowVisible",
-			typeof(bool), typeof(BrightnessWindow), new PropertyMetadata(default(bool), OnPropertyChanged));
+			typeof(bool), typeof(BrightnessWindow), new PropertyMetadata(default(bool), OnWindowVisibleChanged));
 
 		public bool IsWindowVisible
 		{
@@ -23,11 +23,6 @@ namespace WindowsBrightnessControl.View
 
 		public BrightnessWindow()
         {
-			int marginTop = 80;
-			this.Top = SystemParameters.WorkArea.Height - this.ActualHeight - marginTop;
-			//this.Top = 100;
-			int marginLeft = 30;
-			this.Left = SystemParameters.WorkArea.Width - this.Width - marginLeft;
 		}
 
 		public void ShowSettingsWindow(object sender, RoutedEventArgs args)
@@ -42,13 +37,19 @@ namespace WindowsBrightnessControl.View
 			}
 		}
 
-		private static void OnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		private static void OnWindowVisibleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
 			if (e.OldValue == e.NewValue) return;
 
 			var window = (MainWindow)d;
 			bool visible = (bool)e.NewValue;
-			System.Console.WriteLine("Window visible: " + visible);
+			window.OnWindowVisibleChanged(visible);
+			//System.Console.WriteLine("Window visible: " + visible);
+			//window.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
+		}
+
+		protected virtual void OnWindowVisibleChanged(bool visible)
+		{
 		}
 	}
 }
