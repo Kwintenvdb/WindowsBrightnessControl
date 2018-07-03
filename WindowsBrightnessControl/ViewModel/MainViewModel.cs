@@ -20,6 +20,9 @@ namespace WindowsBrightnessControl.ViewModel
 		public RelayCommand ShowWindowCommand { get; private set; }
 		public RelayCommand ExitApplicationCommand { get; private set; }
 
+		public RelayCommand IncreaseBrightnessCommand { get; private set; }
+		public RelayCommand DecreaseBrightnessCommand { get; private set; }
+
 		private readonly HotKeyManagerViewModel _hotKeyManager;
 		private readonly ISettingsProvider _settingsProvider;
 		private readonly IStartupService _startupService;
@@ -40,6 +43,9 @@ namespace WindowsBrightnessControl.ViewModel
 			MouseWheelCommand = new RelayCommand<MouseWheelEventArgs>(OnMouseWheelScroll);
 			ShowWindowCommand = new RelayCommand(ShowWindow);
 			ExitApplicationCommand = new RelayCommand(ExitApplication);
+
+			IncreaseBrightnessCommand = new RelayCommand(IncreaseBrightness);
+			DecreaseBrightnessCommand = new RelayCommand(DecreaseBrightness);
 
 			_settingsProvider = settingsProvider;
 			_startupService = startupService;
@@ -68,12 +74,24 @@ namespace WindowsBrightnessControl.ViewModel
 			if (direction > 0)
 			{
 				// This sort of thing is repeated quite often... Refactor?
-				Monitor.Brightness += Settings.SnappingInterval;
+				//Monitor.Brightness += Settings.SnappingInterval;
+				IncreaseBrightness();
 			}
 			else
 			{
-				Monitor.Brightness -= Settings.SnappingInterval;
+				//Monitor.Brightness -= Settings.SnappingInterval;
+				DecreaseBrightness();
 			}
+		}
+
+		private void IncreaseBrightness()
+		{
+			Monitor.Brightness += Settings.SnappingInterval;
+		}
+
+		private void DecreaseBrightness()
+		{
+			Monitor.Brightness -= Settings.SnappingInterval;
 		}
 
 		private void ShowWindow()

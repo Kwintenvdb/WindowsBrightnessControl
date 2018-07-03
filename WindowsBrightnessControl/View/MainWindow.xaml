@@ -20,7 +20,7 @@
 	<Window.Background>
 		<SolidColorBrush Color="Black" Opacity="0.75"/>
 	</Window.Background>
-
+	
 	<i:Interaction.Triggers>
 		<i:EventTrigger EventName="PreviewMouseWheel">
 			<cmd:EventToCommand Command="{Binding MouseWheelCommand}" PassEventArgsToCommand="True"/>

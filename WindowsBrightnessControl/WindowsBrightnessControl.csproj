@@ -150,7 +150,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\HotKeyInputControlLibrary\HotKeyInputControlLibrary.csproj">
+      <Project>{d13e0132-3c45-4c02-b278-b936013c9422}</Project>
+      <Name>HotKeyInputControlLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\brightness.ico" />
   </ItemGroup>

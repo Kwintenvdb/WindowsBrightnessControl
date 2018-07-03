@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
+		xmlns:hotkeyinputcontrollibrary="clr-namespace:HotKeyInputControlLibrary;assembly=HotKeyInputControlLibrary"
+		mc:Ignorable="d"
         Title="Windows Brightness Control Settings" Height="300" Width="350"
 		WindowStartupLocation="CenterScreen"
 		ResizeMode="NoResize" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
@@ -24,7 +25,11 @@
 					<CheckBox Content="Use hotkeys"
 							  IsChecked="{Binding UseHotKeys}"/>
 					<TextBlock Text="Press Alt+F9 or Alt+F10 to decrease and increase brightness." TextWrapping="Wrap"
-							   Visibility="{Binding UseHotKeys, Converter={StaticResource BoolToVis}}"/>
+							   Visibility="{Binding UseHotKeys, Converter={StaticResource BoolToVis}}"
+							   Margin="0,0,0,5"/>
+
+					<hotkeyinputcontrollibrary:HotKeyInput
+						Modifiers="Ctrl" Key="K"/>
 				</StackPanel>
 			</TabItem>
 
