@@ -62,6 +62,8 @@ namespace WindowsBrightnessControl.ViewModel
 		// boilerplate implementation effort to get rid of.
 		private void OnMouseWheelScroll(MouseWheelEventArgs args)
 		{
+			if (!Settings.UseMouseWheel) return;
+
 			int direction = Math.Sign(args.Delta);
 			if (direction > 0)
 			{

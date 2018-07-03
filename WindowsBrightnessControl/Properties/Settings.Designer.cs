@@ -70,5 +70,17 @@ namespace WindowsBrightnessControl.Properties {
                 this["SnapBrightness"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseMouseWheel {
+            get {
+                return ((bool)(this["UseMouseWheel"]));
+            }
+            set {
+                this["UseMouseWheel"] = value;
+            }
+        }
     }
 }

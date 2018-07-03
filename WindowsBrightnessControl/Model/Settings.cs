@@ -2,9 +2,11 @@
 {
 	public struct Settings
 	{
-		// Use intervals?
+		// Brightness slider settings
 		public bool SnapBrightness;
 		public int SnappingInterval;
+		public bool UseMouseWheel;
+		// Use intervals?
 
 		// Application settings
 		public bool RunOnStartUp;

@@ -58,6 +58,18 @@ namespace WindowsBrightnessControl.ViewModel
 			}
 		}
 
+		public bool UseMouseWheel
+		{
+			get => _settings.UseMouseWheel;
+			set
+			{
+				if (SetField(ref _settings.UseMouseWheel, value))
+				{
+					OnLocalSettingsChanged();
+				}
+			}
+		}
+
 		public bool SettingsDirty
 		{
 			get => !_oldSettings.Equals(_settings);
@@ -116,6 +128,7 @@ namespace WindowsBrightnessControl.ViewModel
 			RaisePropertyChanged(nameof(UseHotKeys));
 			RaisePropertyChanged(nameof(SnapBrightness));
 			RaisePropertyChanged(nameof(SnappingInterval));
+			RaisePropertyChanged(nameof(UseMouseWheel));
 
 			SettingsChanged?.Invoke();
 		}

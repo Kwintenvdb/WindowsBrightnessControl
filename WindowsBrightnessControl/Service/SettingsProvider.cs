@@ -14,20 +14,22 @@ namespace WindowsBrightnessControl.Service
 			var userSettings = UserSettings;
 			return new Settings()
 			{
-				RunOnStartUp = userSettings.RunOnStartUp,
 				SnapBrightness = userSettings.SnapBrightness,
 				SnappingInterval = userSettings.SnappingInterval,
-				UseHotKeys = userSettings.UseHotKeys
+				UseMouseWheel = userSettings.UseMouseWheel,
+				UseHotKeys = userSettings.UseHotKeys,
+				RunOnStartUp = userSettings.RunOnStartUp
 			};
 		}
 
 		public void SaveSettings(Settings settings)
 		{
 			var userSettings = UserSettings;
-			userSettings.RunOnStartUp = settings.RunOnStartUp;
 			userSettings.SnapBrightness = settings.SnapBrightness;
 			userSettings.SnappingInterval = settings.SnappingInterval;
+			userSettings.UseMouseWheel = settings.UseMouseWheel;
 			userSettings.UseHotKeys = settings.UseHotKeys;
+			userSettings.RunOnStartUp = settings.RunOnStartUp;
 			userSettings.Save();
 
 			SettingsChanged.Invoke();
