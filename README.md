@@ -10,6 +10,7 @@ This app is a small tray utility that can be controlled with keyboard shortcuts.
   * __Alt + F9__ to decrease brightness
   * __Alt + F10__ to increase brightness
 * Control brightness using slider (press the taskbar tray icon to show)
+* Configurable brightness interval
 * Run the app on Windows startup
 
 ## To do
