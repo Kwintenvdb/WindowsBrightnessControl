@@ -1,4 +1,4 @@
-# WindowsBrightnessControl
+# Windows Brightness Control
 A small tool to control monitor brightness on Windows.
 
 Windows tends not to have a native brightness control for most external monitors. I wrote this app using WPF in an effort to resolve this frustration.
