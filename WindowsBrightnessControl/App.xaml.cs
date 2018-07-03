@@ -18,13 +18,15 @@ namespace WindowsBrightnessControl
 			var windowHandle = new WindowInteropHelper(window).EnsureHandle();
 			
 			// Services
-			IMonitorService service = new MonitorService();
+			IMonitorService monitorService = new MonitorService();
 			IHotKeyProcessor hotKeyProcessor = new HotKeyProcessor(windowHandle);
 			ISettingsProvider settingsProvider = new SettingsProvider();
 			IStartupService startupService = new RegistryStartupService();
+			IDialogService dialogService = new DialogService();
 
 			// Set window DataContext and show.
-			window.DataContext = new MainViewModel(service, hotKeyProcessor, settingsProvider, startupService);
+			window.DataContext = new MainViewModel(monitorService, hotKeyProcessor, settingsProvider, startupService,
+				dialogService);
 			window.Show();
 		}
 	}

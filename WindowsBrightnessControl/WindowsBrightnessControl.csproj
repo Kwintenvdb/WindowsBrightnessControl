@@ -82,6 +82,8 @@
     <Compile Include="HotKey\IHotKeyProcessor.cs" />
     <Compile Include="Model\MouseWheelEventData.cs" />
     <Compile Include="Model\Settings.cs" />
+    <Compile Include="Service\DialogService.cs" />
+    <Compile Include="Service\IDialogService.cs" />
     <Compile Include="Service\IMonitorService.cs" />
     <Compile Include="Service\ISettingsProvider.cs" />
     <Compile Include="Service\IStartupService.cs" />

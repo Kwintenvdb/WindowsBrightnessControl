@@ -29,6 +29,8 @@ namespace WindowsBrightnessControl.HotKey
 			}
 		}
 
+		public const int WM_HOTKEY = 0x312;
+
 		private readonly HwndSource _windowHandleSource;
 		private readonly Dictionary<int, HotKey> _hotKeys = new Dictionary<int, HotKey>();
 
@@ -62,7 +64,6 @@ namespace WindowsBrightnessControl.HotKey
 
 		private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
 		{
-			const int WM_HOTKEY = 0x0312;
 			if (msg == WM_HOTKEY)
 			{
 				int id = wParam.ToInt32();

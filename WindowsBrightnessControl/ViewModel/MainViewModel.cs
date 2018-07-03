@@ -23,16 +23,18 @@ namespace WindowsBrightnessControl.ViewModel
 		private readonly HotKeyManagerViewModel _hotKeyManager;
 		private readonly ISettingsProvider _settingsProvider;
 		private readonly IStartupService _startupService;
+		private readonly IDialogService _dialogService;
 
 		private DispatcherTimer _visibilityTimer;
 
 		public MainViewModel(IMonitorService monitorService, IHotKeyProcessor hotKeyProcessor, ISettingsProvider settingsProvider,
-			IStartupService startupService)
+			IStartupService startupService, IDialogService dialogService)
 		{
 			var monitors = monitorService.GetPhysicalMonitors();
 			Monitor = new MonitorViewModel(monitors.First(), monitorService);
 			Monitor.BrightnessChanged += OnBrightnessChanged;
-			Settings = new SettingsViewModel(settingsProvider);
+
+			Settings = new SettingsViewModel(settingsProvider, dialogService);
 			Settings.SettingsChanged += OnSettingsChanged;
 
 			MouseWheelCommand = new RelayCommand<MouseWheelEventArgs>(OnMouseWheelScroll);
@@ -43,6 +45,7 @@ namespace WindowsBrightnessControl.ViewModel
 			_startupService = startupService;
 			_startupService.RunAppOnStartup(Settings.RunOnStartUp);
 			_hotKeyManager = new HotKeyManagerViewModel(hotKeyProcessor, this);
+			_dialogService = dialogService;
 		}
 
 		private void OnBrightnessChanged()
@@ -97,7 +100,7 @@ namespace WindowsBrightnessControl.ViewModel
 
 		public SettingsViewModel GetEditingSettingsViewModel()
 		{
-			return new SettingsViewModel(_settingsProvider);
+			return new SettingsViewModel(_settingsProvider, _dialogService);
 		}
 
 		public void ExitApplication()

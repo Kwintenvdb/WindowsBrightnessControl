@@ -68,11 +68,13 @@ namespace WindowsBrightnessControl.ViewModel
 		private Settings _oldSettings;
 		private Settings _settings;
 		private readonly ISettingsProvider _settingsProvider;
+		private readonly IDialogService _dialogService;
 
-		public SettingsViewModel(ISettingsProvider settingsProvider)
+		public SettingsViewModel(ISettingsProvider settingsProvider, IDialogService dialogService)
 		{
 			_settingsProvider = settingsProvider;
 			_settingsProvider.SettingsChanged += OnSettingsChanged;
+			_dialogService = dialogService;
 			GetSettings();
 
 			SaveSettingsCommand = new RelayCommand(SaveSettings, () => SettingsDirty);
@@ -92,7 +94,13 @@ namespace WindowsBrightnessControl.ViewModel
 
 		public void ResetSettings()
 		{
-			_settingsProvider.ResetSettings();
+			_dialogService.ShowDialog("Use default settings?", "Do you want to revert all settings to default?", (ok) =>
+			{
+				if (ok)
+				{
+					_settingsProvider.ResetSettings();
+				}
+			});
 		}
 
 		private void OnLocalSettingsChanged()
