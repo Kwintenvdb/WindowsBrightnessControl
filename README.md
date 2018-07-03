@@ -14,7 +14,10 @@ This app is a small tray utility that can be controlled with keyboard shortcuts.
 * Run the app on Windows startup
 
 ## To do
+* First alpha release
+* Add new icons
 * Configurable hotkeys
 * Display current brightness over tray icon
 * UI tweaks and animations (should be toggleable)
 * Support multiple monitors
+* Create installer and uninstaller
