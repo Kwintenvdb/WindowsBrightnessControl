@@ -23,13 +23,38 @@
 					<CheckBox Content="Run app on startup" Margin="0,0,0,5"
 							  IsChecked="{Binding RunOnStartUp}"/>
 					<CheckBox Content="Use hotkeys"
-							  IsChecked="{Binding UseHotKeys}"/>
-					<TextBlock Text="Press Alt+F9 or Alt+F10 to decrease and increase brightness." TextWrapping="Wrap"
-							   Visibility="{Binding UseHotKeys, Converter={StaticResource BoolToVis}}"
-							   Margin="0,0,0,5"/>
+							  IsChecked="{Binding UseHotKeys}"
+							  Margin="0,0,0,5"/>
 
-					<hotkeyinputcontrollibrary:HotKeyInput
-						Modifiers="Ctrl" Key="K"/>
+					<GroupBox Header="Hotkeys">
+						<Grid Margin="3">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="1.35*"/>
+								<ColumnDefinition Width="2*"/>
+							</Grid.ColumnDefinitions>
+
+							<Grid.RowDefinitions>
+								<RowDefinition/>
+								<RowDefinition/>
+							</Grid.RowDefinitions>
+
+							<TextBlock Text="Increase brightness" Grid.Column="0" Grid.Row="0"
+								    Margin="0,0,0,5"/>
+
+							<hotkeyinputcontrollibrary:HotKeyInput
+							Grid.Column="1" Grid.Row="0"
+							HorizontalAlignment="Stretch" Margin="0,0,0,5"
+							Modifiers="Ctrl" Key="K"/>
+
+							<TextBlock Text="Decrease brightness" Grid.Column="0" Grid.Row="1"/>
+
+							<hotkeyinputcontrollibrary:HotKeyInput
+							Grid.Column="1" Grid.Row="1"
+							HorizontalAlignment="Stretch"
+							Modifiers="Ctrl" Key="K"/>
+						</Grid>
+					</GroupBox>
+					
 				</StackPanel>
 			</TabItem>
 
