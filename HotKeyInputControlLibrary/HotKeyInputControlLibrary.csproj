@@ -53,6 +53,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="HotKeyData.cs" />
     <Compile Include="HotKeyInput.xaml.cs">
       <DependentUpon>HotKeyInput.xaml</DependentUpon>
     </Compile>

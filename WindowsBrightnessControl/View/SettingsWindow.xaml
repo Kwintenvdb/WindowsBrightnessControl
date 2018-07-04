@@ -26,7 +26,7 @@
 							  IsChecked="{Binding UseHotKeys}"
 							  Margin="0,0,0,5"/>
 
-					<GroupBox Header="Hotkeys">
+					<GroupBox Header="Hotkeys" Visibility="{Binding UseHotKeys, Mode=OneWay, Converter={StaticResource BoolToVis}}">
 						<Grid Margin="3">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="1.35*"/>
@@ -42,16 +42,16 @@
 								    Margin="0,0,0,5"/>
 
 							<hotkeyinputcontrollibrary:HotKeyInput
-							Grid.Column="1" Grid.Row="0"
-							HorizontalAlignment="Stretch" Margin="0,0,0,5"
-							Modifiers="Ctrl" Key="K"/>
+								Grid.Column="1" Grid.Row="0"
+								HorizontalAlignment="Stretch" Margin="0,0,0,5"
+								HotKey="{Binding IncreaseBrightnessHotKey, Mode=TwoWay}"/>
 
 							<TextBlock Text="Decrease brightness" Grid.Column="0" Grid.Row="1"/>
 
 							<hotkeyinputcontrollibrary:HotKeyInput
-							Grid.Column="1" Grid.Row="1"
-							HorizontalAlignment="Stretch"
-							Modifiers="Ctrl" Key="K"/>
+								Grid.Column="1" Grid.Row="1"
+								HorizontalAlignment="Stretch"
+								HotKey="{Binding DecreaseBrightnessHotKey, Mode=TwoWay}"/>
 						</Grid>
 					</GroupBox>
 					
@@ -75,7 +75,8 @@
 								Minimum="1"
 								Maximum="100"
 								Interval="1"/>
-						<TextBlock Text="{Binding SnappingInterval}"
+						
+						<TextBlock Text="{Binding SnappingInterval, Mode=OneWay}"
 								   HorizontalAlignment="Right"
 								   Grid.Column="2"/>
 					</Grid>

@@ -84,12 +84,12 @@ namespace WindowsBrightnessControl.ViewModel
 			}
 		}
 
-		private void IncreaseBrightness()
+		public void IncreaseBrightness()
 		{
 			Monitor.Brightness += Settings.SnappingInterval;
 		}
 
-		private void DecreaseBrightness()
+		public void DecreaseBrightness()
 		{
 			Monitor.Brightness -= Settings.SnappingInterval;
 		}

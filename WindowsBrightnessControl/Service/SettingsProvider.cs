@@ -18,7 +18,9 @@ namespace WindowsBrightnessControl.Service
 				SnappingInterval = userSettings.SnappingInterval,
 				UseMouseWheel = userSettings.UseMouseWheel,
 				UseHotKeys = userSettings.UseHotKeys,
-				RunOnStartUp = userSettings.RunOnStartUp
+				RunOnStartUp = userSettings.RunOnStartUp,
+				IncreaseBrightnessHotKey = userSettings.IncreaseBrightnessHotKey,
+				DecreaseBrightnessHotKey = userSettings.DecreaseBrightnessHotKey
 			};
 		}
 
@@ -30,6 +32,8 @@ namespace WindowsBrightnessControl.Service
 			userSettings.UseMouseWheel = settings.UseMouseWheel;
 			userSettings.UseHotKeys = settings.UseHotKeys;
 			userSettings.RunOnStartUp = settings.RunOnStartUp;
+			userSettings.IncreaseBrightnessHotKey = settings.IncreaseBrightnessHotKey;
+			userSettings.DecreaseBrightnessHotKey = settings.DecreaseBrightnessHotKey;
 			userSettings.Save();
 
 			SettingsChanged.Invoke();

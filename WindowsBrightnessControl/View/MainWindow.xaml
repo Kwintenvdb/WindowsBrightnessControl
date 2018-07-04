@@ -16,6 +16,7 @@
 		AllowsTransparency="True"
 		WindowStartupLocation="Manual"
 		ResizeMode="NoResize"
+		ShowInTaskbar="False"
 		IsWindowVisible="{Binding IsWindowVisible.Value, Mode=OneWay}">
 	<Window.Background>
 		<SolidColorBrush Color="Black" Opacity="0.75"/>

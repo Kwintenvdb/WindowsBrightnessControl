@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Input;
 using WindowsBrightnessControl.HotKey;
 
 namespace WindowsBrightnessControl.ViewModel
@@ -9,7 +8,6 @@ namespace WindowsBrightnessControl.ViewModel
 		private readonly IHotKeyProcessor _hotKeyProcessor;
 		private readonly MainViewModel _mainViewModel;
 
-		private MonitorViewModel Monitor => _mainViewModel.Monitor;
 		private SettingsViewModel Settings => _mainViewModel.Settings;
 
 		private List<int> _hotKeyIds;
@@ -29,14 +27,18 @@ namespace WindowsBrightnessControl.ViewModel
 
 			if (Settings.UseHotKeys)
 			{
-				int increaseBrightnessId = _hotKeyProcessor.AddHotKey(ModifierKeys.Alt, Key.F10, () =>
+				int increaseBrightnessId = _hotKeyProcessor.AddHotKey(
+					Settings.IncreaseBrightnessHotKey.Modifiers,
+					Settings.IncreaseBrightnessHotKey.Key, () =>
 				{
-					Monitor.Brightness += Settings.SnappingInterval;
+					_mainViewModel.IncreaseBrightness();
 				});
 
-				int decreaseBrightnessId = _hotKeyProcessor.AddHotKey(ModifierKeys.Alt, Key.F9, () =>
+				int decreaseBrightnessId = _hotKeyProcessor.AddHotKey(
+					Settings.DecreaseBrightnessHotKey.Modifiers,
+					Settings.DecreaseBrightnessHotKey.Key, () =>
 				{
-					Monitor.Brightness -= Settings.SnappingInterval;
+					_mainViewModel.DecreaseBrightness();
 				});
 
 				_hotKeyIds = new List<int>
@@ -55,6 +57,7 @@ namespace WindowsBrightnessControl.ViewModel
 				{
 					_hotKeyProcessor.RemoveHotKey(id);
 				}
+				_hotKeyIds = null;
 			}
 		}
 	}

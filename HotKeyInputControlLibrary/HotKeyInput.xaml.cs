@@ -6,24 +6,14 @@ namespace HotKeyInputControlLibrary
 {
 	public partial class HotKeyInput : UserControl
 	{
-		public static readonly DependencyProperty ModifiersProperty = DependencyProperty.Register(
-			nameof(Modifiers), typeof(ModifierKeys), typeof(HotKeyInput),
-			new PropertyMetadata(ModifierKeys.None, OnKeyValueChanged));
+		public static readonly DependencyProperty HotKeyProperty = DependencyProperty.Register(
+			nameof(HotKey), typeof(HotKeyData), typeof(HotKeyInput),
+			new PropertyMetadata(default(HotKeyData), OnHotKeyDataChanged));
 
-		public static readonly DependencyProperty KeyProperty = DependencyProperty.Register(
-			nameof(Key), typeof(Key), typeof(HotKeyInput),
-			new PropertyMetadata(Key.None, OnKeyValueChanged));
-
-		public ModifierKeys Modifiers
+		public HotKeyData HotKey
 		{
-			get => (ModifierKeys)GetValue(ModifiersProperty);
-			set => SetValue(ModifiersProperty, value);
-		}
-
-		public Key Key
-		{
-			get => (Key)GetValue(KeyProperty);
-			set => SetValue(KeyProperty, value);
+			get => (HotKeyData)GetValue(HotKeyProperty);
+			set => SetValue(HotKeyProperty, value);
 		}
 
 		public HotKeyInput()
@@ -38,14 +28,19 @@ namespace HotKeyInputControlLibrary
 			var modifiers = e.KeyboardDevice.Modifiers;
 			var key = e.Key;
 
-			Modifiers = modifiers;
-			Key = key;
+			// When Alt is pressed, SystemKey is used instead.
+			if (key == Key.System)
+			{
+				key = e.SystemKey;
+			}
+
+			HotKey = new HotKeyData(modifiers, key);
 		}
 
-		private static void OnKeyValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		private static void OnHotKeyDataChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
 			var input = (HotKeyInput)d;
-			input.textBox.Text = $"{input.Modifiers} + {input.Key}";
+			input.textBox.Text = $"{input.HotKey.Modifiers} + {input.HotKey.Key}";
 		}
 	}
 }

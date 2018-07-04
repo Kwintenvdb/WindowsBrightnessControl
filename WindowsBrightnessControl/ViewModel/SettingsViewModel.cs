@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
+using HotKeyInputControlLibrary;
 using System;
+using System.Runtime.CompilerServices;
 using WindowsBrightnessControl.Model;
 using WindowsBrightnessControl.Service;
 
@@ -38,6 +40,18 @@ namespace WindowsBrightnessControl.ViewModel
 		{
 			get => _settings.UseMouseWheel;
 			set => SetLocalSetting(ref _settings.UseMouseWheel, value);
+		}
+
+		public HotKeyData IncreaseBrightnessHotKey
+		{
+			get => _settings.IncreaseBrightnessHotKey;
+			set => SetLocalSetting(ref _settings.IncreaseBrightnessHotKey, value);
+		}
+
+		public HotKeyData DecreaseBrightnessHotKey
+		{
+			get => _settings.DecreaseBrightnessHotKey;
+			set => SetLocalSetting(ref _settings.DecreaseBrightnessHotKey, value);
 		}
 
 		public bool SettingsDirty
@@ -85,9 +99,9 @@ namespace WindowsBrightnessControl.ViewModel
 			});
 		}
 
-		private void SetLocalSetting<T>(ref T settingField, T value)
+		private void SetLocalSetting<T>(ref T settingField, T value, [CallerMemberName] string propertyName = null)
 		{
-			if (SetField(ref settingField, value))
+			if (SetField(ref settingField, value, propertyName))
 			{
 				OnLocalSettingsChanged();
 			}
@@ -107,6 +121,8 @@ namespace WindowsBrightnessControl.ViewModel
 			RaisePropertyChanged(nameof(SnapBrightness));
 			RaisePropertyChanged(nameof(SnappingInterval));
 			RaisePropertyChanged(nameof(UseMouseWheel));
+			RaisePropertyChanged(nameof(IncreaseBrightnessHotKey));
+			RaisePropertyChanged(nameof(DecreaseBrightnessHotKey));
 
 			SettingsChanged?.Invoke();
 		}

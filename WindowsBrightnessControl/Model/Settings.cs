@@ -1,4 +1,6 @@
-﻿namespace WindowsBrightnessControl.Model
+﻿using HotKeyInputControlLibrary;
+
+namespace WindowsBrightnessControl.Model
 {
 	public struct Settings
 	{
@@ -11,5 +13,9 @@
 		// Application settings
 		public bool RunOnStartUp;
 		public bool UseHotKeys;
+
+		// Hotkeys
+		public HotKeyData IncreaseBrightnessHotKey;
+		public HotKeyData DecreaseBrightnessHotKey;
 	}
 }
