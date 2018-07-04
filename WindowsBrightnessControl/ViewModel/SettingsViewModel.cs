@@ -13,61 +13,31 @@ namespace WindowsBrightnessControl.ViewModel
 		public bool RunOnStartUp
 		{
 			get => _settings.RunOnStartUp;
-			set
-			{
-				if (SetField(ref _settings.RunOnStartUp, value))
-				{
-					OnLocalSettingsChanged();
-				}
-			}
+			set => SetLocalSetting(ref _settings.RunOnStartUp, value);
 		}
 
 		public bool UseHotKeys
 		{
 			get => _settings.UseHotKeys;
-			set
-			{
-				if (SetField(ref _settings.UseHotKeys, value))
-				{
-					OnLocalSettingsChanged();
-				}
-			}
+			set => SetLocalSetting(ref _settings.UseHotKeys, value);
 		}
 
 		public bool SnapBrightness
 		{
 			get => _settings.SnapBrightness;
-			set
-			{
-				if (SetField(ref _settings.SnapBrightness, value))
-				{
-					OnLocalSettingsChanged();
-				}
-			}
+			set => SetLocalSetting(ref _settings.SnapBrightness, value);
 		}
 
 		public int SnappingInterval
 		{
 			get => _settings.SnappingInterval;
-			set
-			{
-				if (SetField(ref _settings.SnappingInterval, value))
-				{
-					OnLocalSettingsChanged();
-				}
-			}
+			set => SetLocalSetting(ref _settings.SnappingInterval, value);
 		}
 
 		public bool UseMouseWheel
 		{
 			get => _settings.UseMouseWheel;
-			set
-			{
-				if (SetField(ref _settings.UseMouseWheel, value))
-				{
-					OnLocalSettingsChanged();
-				}
-			}
+			set => SetLocalSetting(ref _settings.UseMouseWheel, value);
 		}
 
 		public bool SettingsDirty
@@ -113,6 +83,14 @@ namespace WindowsBrightnessControl.ViewModel
 					_settingsProvider.ResetSettings();
 				}
 			});
+		}
+
+		private void SetLocalSetting<T>(ref T settingField, T value)
+		{
+			if (SetField(ref settingField, value))
+			{
+				OnLocalSettingsChanged();
+			}
 		}
 
 		private void OnLocalSettingsChanged()
