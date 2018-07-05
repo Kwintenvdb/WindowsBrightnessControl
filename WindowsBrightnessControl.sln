@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsBrightnessControl", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotKeyInputControlLibrary", "HotKeyInputControlLibrary\HotKeyInputControlLibrary.csproj", "{D13E0132-3C45-4C02-B278-B936013C9422}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{9315C84A-FE06-4293-9A6C-4B41202FD3D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D13E0132-3C45-4C02-B278-B936013C9422}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D13E0132-3C45-4C02-B278-B936013C9422}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D13E0132-3C45-4C02-B278-B936013C9422}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9315C84A-FE06-4293-9A6C-4B41202FD3D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9315C84A-FE06-4293-9A6C-4B41202FD3D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9315C84A-FE06-4293-9A6C-4B41202FD3D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9315C84A-FE06-4293-9A6C-4B41202FD3D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
