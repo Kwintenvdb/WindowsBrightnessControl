@@ -31,8 +31,6 @@ namespace WindowsBrightnessControl
 			var vm = new MainViewModel(monitorService, hotKeyService, settingsProvider, startupService, dialogService);
 			window.DataContext = vm;
 			window.Visibility = Visibility.Collapsed;
-			//window.Show();
-			//window.Hide();
 		}
 	}
 }

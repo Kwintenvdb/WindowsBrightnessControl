@@ -38,10 +38,10 @@
 		<!--Testing taskbar icon...-->
 		<tb:TaskbarIcon x:Name="myNotifyIcon"
                     Visibility="Visible"
-                    ToolTipText="Windows Brightness Control"
                     MenuActivation="RightClick"
 					LeftClickCommand="{Binding ShowWindowCommand}"
-					IconSource="/Resources/Icons/brightness.ico">
+					IconSource="/Resources/Icons/brightness.ico"
+					ToolTipText="{Binding Monitor.Brightness}">
 
 			<tb:TaskbarIcon.ContextMenu>
 				<ContextMenu>

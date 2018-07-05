@@ -18,7 +18,6 @@ namespace WindowsBrightnessControl.View
 			this.Left = SystemParameters.WorkArea.Width - this.Width - marginLeft;
 
 			this.Visibility = Visibility.Collapsed;
-			this.Opacity = 0;
 		}
 
 		protected override void OnWindowVisibleChanged(bool visible)
@@ -26,6 +25,7 @@ namespace WindowsBrightnessControl.View
 			if (_storyboard != null)
 			{
 				this.BeginAnimation(VisibilityProperty, null);
+				this.BeginAnimation(OpacityProperty, null);
 				_storyboard.Remove(this);
 				_storyboard.Stop(this);
 				_storyboard = null;
@@ -33,22 +33,22 @@ namespace WindowsBrightnessControl.View
 
 			if (visible)
 			{
+				this.Opacity = 1;
 				this.Visibility = Visibility.Visible;
 			}
-
-			_storyboard = new Storyboard();
-			double from = this.Opacity;
-			double to = visible ? 1.0 : 0.0;
-			double duration = visible ? 0.1 : 0.2;
-			var fadeDurationTimeSpan = TimeSpan.FromSeconds(duration);
-			var fadeAnimation = new DoubleAnimation(from, to, fadeDurationTimeSpan);
-
-			_storyboard.Children.Add(fadeAnimation);
-			Storyboard.SetTargetName(fadeAnimation, this.Name);
-			Storyboard.SetTargetProperty(fadeAnimation, new PropertyPath(OpacityProperty));
-
-			if (!visible)
+			else
 			{
+				_storyboard = new Storyboard();
+				double from = this.Opacity;
+				double to = 0.0;
+				double duration = 0.2;
+				var fadeDurationTimeSpan = TimeSpan.FromSeconds(duration);
+				var fadeAnimation = new DoubleAnimation(from, to, fadeDurationTimeSpan);
+
+				_storyboard.Children.Add(fadeAnimation);
+				Storyboard.SetTargetName(fadeAnimation, this.Name);
+				Storyboard.SetTargetProperty(fadeAnimation, new PropertyPath(OpacityProperty));
+
 				var visibilityAnimation = new ObjectAnimationUsingKeyFrames();
 				var keyTime = KeyTime.FromTimeSpan(fadeDurationTimeSpan);
 				visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Collapsed, keyTime));
@@ -56,10 +56,9 @@ namespace WindowsBrightnessControl.View
 				_storyboard.Children.Add(visibilityAnimation);
 				Storyboard.SetTargetName(visibilityAnimation, this.Name);
 				Storyboard.SetTargetProperty(visibilityAnimation, new PropertyPath(VisibilityProperty));
-			}
-			
 
-			BeginStoryboard(_storyboard);
+				BeginStoryboard(_storyboard);
+			}
 		}
 	}
 }
