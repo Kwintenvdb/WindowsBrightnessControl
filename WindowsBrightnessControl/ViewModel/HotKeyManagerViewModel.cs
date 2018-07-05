@@ -1,21 +1,17 @@
-﻿using System.Collections.Generic;
-using WindowsBrightnessControl.HotKey;
+﻿using WindowsBrightnessControl.Service;
 
 namespace WindowsBrightnessControl.ViewModel
 {
 	public class HotKeyManagerViewModel
 	{
-		private readonly IHotKeyProcessor _hotKeyProcessor;
+		private readonly IHotKeyService _hotKeyService;
 		private readonly MainViewModel _mainViewModel;
 
 		private SettingsViewModel Settings => _mainViewModel.Settings;
 
-		private List<int> _hotKeyIds;
-
-		public HotKeyManagerViewModel(IHotKeyProcessor hotKeyProcessor, MainViewModel mainViewModel)
+		public HotKeyManagerViewModel(IHotKeyService hotKeyService, MainViewModel mainViewModel)
 		{
-			_hotKeyProcessor = hotKeyProcessor;
-			_hotKeyProcessor.StartHotKeyProcessor();
+			_hotKeyService = hotKeyService;
 			_mainViewModel = mainViewModel;
 			Settings.SettingsChanged += ConfigureHotKeys;
 			ConfigureHotKeys();
@@ -27,38 +23,25 @@ namespace WindowsBrightnessControl.ViewModel
 
 			if (Settings.UseHotKeys)
 			{
-				int increaseBrightnessId = _hotKeyProcessor.AddHotKey(
+				_hotKeyService.AddHotKey(
 					Settings.IncreaseBrightnessHotKey.Modifiers,
 					Settings.IncreaseBrightnessHotKey.Key, () =>
 				{
 					_mainViewModel.IncreaseBrightness();
 				});
 
-				int decreaseBrightnessId = _hotKeyProcessor.AddHotKey(
+				_hotKeyService.AddHotKey(
 					Settings.DecreaseBrightnessHotKey.Modifiers,
 					Settings.DecreaseBrightnessHotKey.Key, () =>
 				{
 					_mainViewModel.DecreaseBrightness();
 				});
-
-				_hotKeyIds = new List<int>
-				{
-					increaseBrightnessId,
-					decreaseBrightnessId
-				};
 			}
 		}
 
 		private void ClearHotKeys()
 		{
-			if (_hotKeyIds != null)
-			{
-				foreach (int id in _hotKeyIds)
-				{
-					_hotKeyProcessor.RemoveHotKey(id);
-				}
-				_hotKeyIds = null;
-			}
+			_hotKeyService.ClearHotKeys();
 		}
 	}
 }

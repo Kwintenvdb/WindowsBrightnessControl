@@ -26,7 +26,6 @@ namespace WindowsBrightnessControl.ViewModel
 			get
 			{
 				return _cachedBrightness;
-				//return _monitorService.GetMonitorBrightness(MonitorPtr);
 			}
 			set
 			{

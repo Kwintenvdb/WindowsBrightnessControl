@@ -16,6 +16,9 @@ namespace WindowsBrightnessControl.View
 			this.Top = SystemParameters.WorkArea.Height - this.ActualHeight - marginTop;
 			int marginLeft = 30;
 			this.Left = SystemParameters.WorkArea.Width - this.Width - marginLeft;
+
+			this.Visibility = Visibility.Collapsed;
+			this.Opacity = 0;
 		}
 
 		protected override void OnWindowVisibleChanged(bool visible)
@@ -25,6 +28,7 @@ namespace WindowsBrightnessControl.View
 				this.BeginAnimation(VisibilityProperty, null);
 				_storyboard.Remove(this);
 				_storyboard.Stop(this);
+				_storyboard = null;
 			}
 
 			if (visible)
@@ -56,7 +60,6 @@ namespace WindowsBrightnessControl.View
 			
 
 			BeginStoryboard(_storyboard);
-			//this.BeginAnimation(OpacityProperty, fadeAnimation);
 		}
 	}
 }

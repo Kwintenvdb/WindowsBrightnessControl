@@ -44,8 +44,6 @@ namespace WindowsBrightnessControl.View
 			var window = (MainWindow)d;
 			bool visible = (bool)e.NewValue;
 			window.OnWindowVisibleChanged(visible);
-			//System.Console.WriteLine("Window visible: " + visible);
-			//window.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
 		}
 
 		protected virtual void OnWindowVisibleChanged(bool visible)

@@ -78,12 +78,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HotKey\HotKeyAction.cs" />
     <Compile Include="HotKey\HotKeyProcessor.cs" />
+    <Compile Include="HotKey\IHotKeyHandler.cs" />
     <Compile Include="HotKey\IHotKeyProcessor.cs" />
     <Compile Include="Model\MouseWheelEventData.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Service\DialogService.cs" />
+    <Compile Include="Service\HotKeyService.cs" />
     <Compile Include="Service\IDialogService.cs" />
+    <Compile Include="Service\IHotKeyService.cs" />
     <Compile Include="Service\IMonitorService.cs" />
     <Compile Include="Service\ISettingsProvider.cs" />
     <Compile Include="Service\IStartupService.cs" />

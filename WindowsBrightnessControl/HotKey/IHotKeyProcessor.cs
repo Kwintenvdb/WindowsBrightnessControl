@@ -9,14 +9,20 @@ namespace WindowsBrightnessControl.HotKey
 		/// Starts listening for hotkey events.
 		/// </summary>
 		void StartHotKeyProcessor();
+
 		/// <summary>
-		/// Adds a hotkey mapped to a specified action.
+		/// Registers a hotkey handler.
 		/// </summary>
-		/// <returns>The id of the created hotkey.</returns>
-		int AddHotKey(ModifierKeys modifiers, Key keys, Action action);
+		void RegisterHandler(IHotKeyHandler handler);
+
 		/// <summary>
-		/// Remove a hotkey given its id.
+		/// Adds a hotkey with the system.
 		/// </summary>
-		void RemoveHotKey(int id);
+		bool RegisterHotKey(int id, ModifierKeys modifiers, Key keys);
+
+		/// <summary>
+		/// Unregisters a hotkey from the system.
+		/// </summary>
+		bool UnregisterHotKey(int id);
 	}
 }

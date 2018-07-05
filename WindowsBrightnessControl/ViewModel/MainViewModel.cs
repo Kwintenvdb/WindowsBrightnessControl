@@ -30,7 +30,7 @@ namespace WindowsBrightnessControl.ViewModel
 
 		private DispatcherTimer _visibilityTimer;
 
-		public MainViewModel(IMonitorService monitorService, IHotKeyProcessor hotKeyProcessor, ISettingsProvider settingsProvider,
+		public MainViewModel(IMonitorService monitorService, IHotKeyService hotKeyService, ISettingsProvider settingsProvider,
 			IStartupService startupService, IDialogService dialogService)
 		{
 			var monitors = monitorService.GetPhysicalMonitors();
@@ -50,7 +50,7 @@ namespace WindowsBrightnessControl.ViewModel
 			_settingsProvider = settingsProvider;
 			_startupService = startupService;
 			_startupService.RunAppOnStartup(Settings.RunOnStartUp);
-			_hotKeyManager = new HotKeyManagerViewModel(hotKeyProcessor, this);
+			_hotKeyManager = new HotKeyManagerViewModel(hotKeyService, this);
 			_dialogService = dialogService;
 		}
 
