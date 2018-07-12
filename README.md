@@ -7,8 +7,7 @@ This app is a small tray utility that can be controlled with keyboard shortcuts.
 
 ## Features
 * Control brightness using hotkeys
-  * __Alt + F9__ to decrease brightness
-  * __Alt + F10__ to increase brightness
+  * Hotkeys for increasing and decreasing brightness are available through settings window
 * Control brightness using slider (press the taskbar tray icon to show)
 * Configurable brightness interval
 * Run the app on Windows startup
@@ -16,7 +15,6 @@ This app is a small tray utility that can be controlled with keyboard shortcuts.
 ## To do
 * First alpha release
 * Add new icons
-* Configurable hotkeys
 * Display current brightness over tray icon
 * UI tweaks and animations (should be toggleable)
 * Support multiple monitors
