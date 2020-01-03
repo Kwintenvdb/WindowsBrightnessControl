@@ -10,28 +10,35 @@ namespace WindowsBrightnessControl.Service
 	{
 		public IEnumerable<PhysicalMonitor> GetPhysicalMonitors()
 		{
+			List<IntPtr> displayMonitorPtrs = GetDisplayMonitorPtrs();
+			return displayMonitorPtrs.SelectMany(ptr =>
+			{
+				PHYSICAL_MONITOR[] physMonitors = GetPhysicalMonitors(ptr);
+				return physMonitors.Select(x => new PhysicalMonitor()
+				{
+					hPhysicalMonitor = x.hPhysicalMonitor,
+					szPhysicalMonitorDescription = x.szPhysicalMonitorDescription
+				});
+			});
+		}
+
+		private static List<IntPtr> GetDisplayMonitorPtrs()
+		{
 			var displayMonitorPtrs = new List<IntPtr>();
 			User32.EnumDisplayMonitors(IntPtr.Zero, IntPtr.Zero, (IntPtr hMonitor, IntPtr hdcMonitor, ref RECT lprcMonitor, IntPtr dwData) =>
 			{
 				displayMonitorPtrs.Add(hMonitor);
 				return true;
 			}, IntPtr.Zero);
+			return displayMonitorPtrs;
+		}
 
-			var physicalMonitors = new List<PhysicalMonitor>();
-			foreach (var displayMonitorPtr in displayMonitorPtrs)
-			{
-				Dvxa2.GetNumberOfPhysicalMonitorsFromHMONITOR(displayMonitorPtr, out uint nrPhysicalMonitors);
-				var physMonitors = new PHYSICAL_MONITOR[nrPhysicalMonitors];
-				Dvxa2.GetPhysicalMonitorsFromHMONITOR(displayMonitorPtr, nrPhysicalMonitors, physMonitors);
-
-				// Need to decide if this conversion is really necessary...
-				physicalMonitors.AddRange(physMonitors.Select(x => new PhysicalMonitor()
-				{
-					hPhysicalMonitor = x.hPhysicalMonitor,
-					szPhysicalMonitorDescription = x.szPhysicalMonitorDescription
-				}));
-			}
-			return physicalMonitors;
+		private static PHYSICAL_MONITOR[] GetPhysicalMonitors(IntPtr displayMonitorPtr)
+		{
+			Dvxa2.GetNumberOfPhysicalMonitorsFromHMONITOR(displayMonitorPtr, out uint nrPhysicalMonitors);
+			var physMonitors = new PHYSICAL_MONITOR[nrPhysicalMonitors];
+			Dvxa2.GetPhysicalMonitorsFromHMONITOR(displayMonitorPtr, nrPhysicalMonitors, physMonitors);
+			return physMonitors;
 		}
 
 		public uint GetMonitorBrightness(IntPtr monitorPtr)
